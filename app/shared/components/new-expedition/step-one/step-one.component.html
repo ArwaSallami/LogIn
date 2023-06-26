@@ -1,0 +1,584 @@
+<div class="description-step">
+  <div class="alert alert-danger" role="alert"
+       *ngIf="(httpError.code != '') &&
+       (httpError.code != '200') &&
+       (httpError.code != '201') &&
+       (httpError.code != '401') &&
+       (httpError.code != '404')">
+      Une erreur technique s'est produite, merci de réssayer plus tard.
+  </div>
+<div class="text-content">
+  <h3>envoyer un colis en ligne</h3>
+  <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+    Dolor ex harum id magnam nemo neque suscipit? Accusantium dicta dolore ducimus facilis,
+    incidunt inventore obcaecati porro repellat. Aspernatur, assumenda, quisquam? Commodi.
+  </p>-->
+</div>
+<div class="description-form">
+  <form [formGroup] = "step1_form" (ngSubmit)="onSubmit()" #step1form="ngForm">
+    <!-- Departure & Arrival -->
+    <div class="form-row">
+      <div class="col-md-5 col-12 departure-package">
+        <div class="form-text">
+          <h3>départ</h3>
+            <p>Envoyez votre colis comme étant:</p>
+        </div>
+        
+        <div class="custom-control custom-radio custom-radio-btn custom-control-inline"
+             [ngClass]="senderSelectedType ? 'is-checked' : ''">
+          <input type="radio"
+                 id="partSender"
+                 value="particular"
+                 formControlName="senderType"
+                 class="custom-control-input">
+          <label class="custom-control-label" for="partSender">Particulier</label>
+        </div>
+          <div class="form-text">
+              <p>Comment souhaitez-vous remettre votre colis ?</p>
+          </div>
+        <div class="custom-control custom-radio custom-radio-btn custom-control-inline"
+             [ngClass]="SelectedRadio ? 'is-checked' : ''">
+          <input type="radio"
+                 id="pickingRadio"
+                 formControlName='pickUpMethod'
+                 class="custom-control-input"
+                 value="collect">
+          <label class="custom-control-label"
+                 for="pickingRadio">
+            Ramassage
+          </label>
+        </div>
+        <div class="custom-control custom-radio custom-radio-btn custom-control-inline"
+             [ngClass]="!SelectedRadio ? 'is-checked' : ''">
+          <input type="radio"
+                 id="depotRadio"
+                 formControlName='pickUpMethod'
+                 class="custom-control-input"
+                 value="drop">
+          <label class="custom-control-label"
+                 for="depotRadio">
+            Dépot en point de proximité
+          </label>
+        </div>
+        <div class="form-row" *ngIf="SelectedRadio; else dePoints">
+          <div class="col-md-8 mb-3">
+            <input id="senderGouvernorat"
+                   type="text"
+                   class="form-control custom-form-control"
+                   formControlName="depCity"
+                   [ngbTypeahead]="search"
+                   [resultTemplate]="rt"
+                   [inputFormatter]="formatter"
+                   (blur)="depGov()"
+                   placeholder="Commune*"
+                   [value]="dep_model.name"
+                   [ngClass]="{'red-border': depCity.hasError('required') && step1form.submitted && depCity.invalid}"
+
+            />
+            <ng-template #rt let-r="result" let-t="term">
+              <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+            </ng-template>
+            <div class="help-block with-errors"
+                 *ngIf="httpError.code == 401">
+                <span>
+                    Le parcours est non supporté par la coopérative
+                </span>
+            </div>
+            <div class="help-block with-errors"
+                 *ngIf=" depCity.hasError('required') && step1form.submitted && depCity.invalid">
+                                      <span>
+                                          Entrez une commune valide
+                                      </span>
+            </div>
+          </div>
+          <!-- cp point départ -->
+          <div class="col-md-4 mb-3">
+            <input id="senderCP"
+                   type="text"
+                   class="form-control custom-form-control"
+                   formControlName="depZipCode"
+                   placeholder="CP*"
+
+                   [ngClass]="{'red-border': depZipCode.hasError('required') && step1form.submitted && depZipCode.invalid}"/>
+
+              <div class="help-block with-errors"
+                   *ngIf=" depZipCode.hasError('required') && step1form.submitted && depZipCode.invalid">
+                                      <span>
+                                          Entrez un code postal valide
+                                      </span>
+              </div>
+          </div>
+          <!-- end cp point départ -->
+
+        </div>
+        <ng-template #dePoints>
+          <div class="form-row mb-2">
+            <button class="btn green-btn-sm"
+                    data-toggle="modal"
+                    data-target="#dePointsModalDepart">
+              Choisir mon point de proximité
+            </button>
+
+            <div class="custom-rely" *ngIf="depPointValid">
+
+              <div class="">
+                <p >Vous avez choisi le point de départ: {{depPointRelai.delegation.name}}</p>
+              </div>
+
+
+
+            </div>
+          </div>
+        </ng-template>
+
+      </div>
+      <div class="col-md-5 offset-md-2 col-12 arrival-package">
+        <div class="form-text">
+          <h3>destination</h3>
+          <p>Quelle est votre destination?</p>
+        </div>
+        <div class="custom-control custom-radio custom-radio-btn custom-control-inline"
+             [ngClass]="selected_type ? 'is-checked' : ''"
+        >
+          <input type="radio"
+                 id="proRadio"
+                 value="professional"
+                 formControlName="destinationType"
+                 class="custom-control-input">
+          <label class="custom-control-label"
+                 for="proRadio">Professionnel</label>
+        </div>
+        <div class="custom-control custom-radio custom-radio-btn custom-control-inline"
+             [ngClass]="!selected_type ? 'is-checked' : ''">
+          <input type="radio"
+                 id="partRadio"
+                 value="particular"
+                 formControlName="destinationType"
+                 class="custom-control-input">
+          <label class="custom-control-label" for="partRadio">Particulier</label>
+        </div>
+          <div class="form-text">
+              <p>Comment souhaitez-vous livrer votre colis ?</p>
+          </div>
+          <div class="custom-control custom-radio custom-radio-btn custom-control-inline"
+               [ngClass]="SelectedRadio2 ? 'is-checked' : ''">
+              <input type="radio"
+                     id="deliveryHouseRadio"
+                     formControlName='deliveryMethod'
+                     class="custom-control-input"
+                     value="collect">
+              <label class="custom-control-label"
+                     for="deliveryHouseRadio">
+                  A domicile
+              </label>
+          </div>
+          <div class="custom-control custom-radio custom-radio-btn custom-control-inline"
+               [ngClass]="!SelectedRadio2 ? 'is-checked' : ''">
+              <input type="radio"
+                     id="depotDeliveryRadio"
+                     formControlName='deliveryMethod'
+                     class="custom-control-input"
+                     value="drop">
+              <label class="custom-control-label"
+                     for="depotDeliveryRadio">
+                  Dépot en point de proximité
+              </label>
+          </div>
+
+        <div class="form-row" *ngIf="SelectedRadio2; else desPoints">
+          <div class="col-md-8 mb-3">
+            <input id="receiverGovernorat"
+                   type="text"
+                   class="form-control custom-form-control"
+
+                   formControlName="desCity"
+                   [ngbTypeahead]="search"
+                   [resultTemplate]="rt"
+                   [inputFormatter]="formatter"
+                   (blur)="recGov()"
+                   placeholder="Commune*"
+                   [value]="dest_model.name"
+                   [ngClass]="{'red-border': desCity.hasError('required') && step1form.submitted && desCity.invalid}"
+
+            />
+            <ng-template #rt let-r="result" let-t="term">
+              <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+            </ng-template>
+            <div class="help-block with-errors"
+                 *ngIf=" desCity.hasError('required') && step1form.submitted && desCity.invalid">
+                                      <span>
+                                          Entrez une commune valide
+                                      </span>
+            </div>
+          </div>
+
+          <!-- cp point destination -->
+          <div class="col-md-4 mb-3">
+              <input id="receiverCP"
+                     class="form-control custom-form-control"
+                     formControlName="desZipCode"
+
+                     placeholder="CP*"
+
+                     [ngClass]="{'red-border': desZipCode.hasError('required') && step1form.submitted && desZipCode.invalid}"
+              />
+
+              <div class="help-block with-errors"
+                   *ngIf=" desZipCode.hasError('required') && step1form.submitted && desZipCode.invalid">
+                                      <span>
+                                          Entrez un code postal valide
+                                      </span>
+              </div>
+          </div>
+          <!--end cp point destination -->
+        </div>
+          <ng-template #desPoints>
+              <div class="form-row mb-2">
+                  <button class="btn green-btn-sm"
+                          data-toggle="modal"
+                          data-target="#dePointsModalArrive">
+                      Choisir mon point de proximité
+                  </button>
+
+                <div class="custom-rely" *ngIf="desPointValid">
+
+                  <div class="">
+                    <p >Vous avez choisi le point d'arrivée: {{desPointRelai.delegation.name}}</p>
+                  </div>
+
+
+
+                </div>
+              </div>
+          </ng-template>
+      </div>
+    </div>
+
+    <!-- Package Detail -->
+    <div class="form-row">
+      <div class="text-content">
+        <h3>détail de votre expédition</h3>
+        <p>Veuillez nous préciser si votre envoi est composé de colis, documents ou palettes.</p>
+      </div>
+      <div class="col-md-9 package-dimensions">
+        <div class="form-text">
+          <h3>Poids et dimensions</h3>
+        </div>
+        <div class="custom-control
+                              custom-radio
+                              custom-radio-btn
+                              custom-control-inline
+                              receiver-type"
+             [ngClass]="selected_package ? 'is-checked' : ''">
+          <input type="radio" id="packageRadio"
+                 value="colis"
+                 formControlName="packageType"
+                 class="custom-control-input">
+          <label class="custom-control-label" for="packageRadio" (click)="resetPackages()">Colis</label>
+        </div>
+        <div class="custom-control
+                              custom-radio
+                              custom-radio-btn
+                              custom-control-inline
+                              particular-type"
+             [ngClass]="!selected_package ? 'is-checked' : ''">
+          <input type="radio" id="docRadio"
+                 value="document"
+                 formControlName="packageType"
+                 class="custom-control-input">
+          <label class="custom-control-label" for="docRadio" (click)="resetPackages()">Document</label>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="form-row form-inline package-type-form">
+      <div class="col-md-10">
+        <div formArrayName="package_items"
+             *ngFor="let item of step1_form.get('package_items')['controls']; let i = index">
+          <div [formGroupName]="i">
+            <div class="package-type-item">
+              <label class="sr-only" for="packageID-{{i}}">ID</label>
+              <input type="text"
+                     class="form-control custom-form-control mb-2 mr-sm-2 col-sm-1"
+                     id="packageID-{{i}}"
+                     formControlName="packageID"
+                     value="N{{i+1}}"
+                     [attr.readonly]="true">
+               <label class="sr-only" for="packageDesignation-{{i}}">Designation</label>
+              <input type="text" class="form-control custom-form-control mb-2 mr-sm-2 col-sm-2"
+                     id="packageDesignation-{{i}}"
+                     placeholder="Designation"
+                     formControlName="designation"
+              > 
+           
+              <label class="sr-only" for="packageLength-{{i}}">Longeur</label>
+              <input type="number" class="form-control custom-form-control mb-2 mr-sm-2 col-sm-2"
+                     id="packageLength-{{i}}"
+                     placeholder="longeur (cm)"
+                     formControlName="length"
+                     min="0"
+                     (change)="calcDim($event)"
+                     [ngClass]="{'red-border': (packageLength(i).hasError('incorrect') || packageLength(i).hasError('required') || packageLength(i).hasError('max')) && step1form.submitted && packageLength(i).invalid}"
+              >
+
+              <label class="sr-only" for="packageWidth-{{i}}">largeur</label>
+              <input type="number"
+                     class="form-control custom-form-control mb-2 mr-sm-2 col-sm-2"
+                     id="packageWidth-{{i}}"
+                     formControlName="width"
+                     placeholder="Largeur (cm)"
+                     min="0"
+                     (change)="calcDim($event)"
+                     [ngClass]="{'red-border': (packageWidth(i).hasError('incorrect') || packageWidth(i).hasError('required') || packageWidth(i).hasError('max')) && step1form.submitted && packageWidth(i).invalid}"
+              >
+              <label class="sr-only" for="packageHeight-{{i}}">hauteur</label>
+              <input type="number"
+                     class="form-control custom-form-control mb-2 mr-sm-2 col-sm-2"
+                     id="packageHeight-{{i}}"
+                     formControlName="height"
+                     placeholder="Hauteur (cm)"
+                     min="0"
+                     (change)="calcDim($event)"
+                     [ngClass]="{'red-border': (packageHeight(i).hasError('incorrect') || packageHeight(i).hasError('required') || packageHeight(i).hasError('max')) && step1form.submitted && packageHeight(i).invalid}"
+              >
+                <label class="sr-only" for="packageWeight-{{i}}">poids</label>
+              <input type="number"
+                     class="form-control custom-form-control mb-2 mr-sm-2 col-sm-2"
+                     id="packageWeight-{{i}}"
+                     formControlName="weight"
+                     placeholder="Poids (kg)"
+                     min="0"
+                     (change)="calcDim($event)"
+                     [ngClass]="{'red-border': (packageWeight(i).hasError('required') || packageWeight(i).hasError('max')) && step1form.submitted && packageWeight(i).invalid}"
+              >
+            
+           <input type="number" id="nbcolis" name="nbcolis" formControlName="nbcolis" [(ngModel)] ="nbcolis" class="form-control custom-form-control mb-2 mr-sm-2 col-sm-1" placeholder="nombre de colis" >
+            <button (click)="nbPackage()" class="btn-add">ok</button> 
+                <button class="btn btn-icon" (click)="removePackageItem(i)" *ngIf="i > 0" >
+                    <fa-icon [icon]="['far', 'trash-alt']"></fa-icon>
+                </button>
+                <span class="help-block with-errors"
+                      *ngIf="(packageWeight(i).hasError('required') || packageWeight(i).hasError('max')) && step1form.submitted && packageWeight(i).invalid">
+                          {{weightError(i)}}
+                      </span>
+            </div>
+          </div>
+            <!-- Height text validator -->
+            <span class="help-block with-errors d-block"
+                  *ngIf="(packageHeight(i).hasError('required') || packageHeight(i).hasError('max')) && step1form.submitted && packageHeight(i).invalid">
+                          {{heightError(i)}}
+            </span>
+            <!-- Height text validator -->
+            <span class="help-block with-errors d-block"
+                  *ngIf="(packageWidth(i).hasError('required') || packageWidth(i).hasError('max')) && step1form.submitted && packageWidth(i).invalid">
+                          {{widthError(i)}}
+            </span>
+            <!-- Height text validator -->
+            <span class="help-block with-errors d-block"
+                  *ngIf="(packageLength(i).hasError('required') || packageLength(i).hasError('max')) && step1form.submitted && packageLength(i).invalid">
+                          {{lengthError(i)}}
+            </span>
+            <span class="help-block with-errors d-block"
+            *ngIf="packageDimError(i)"
+            >
+               Longueur + largeur + hauteur ne doit pas dépasser 220 cm
+            </span>
+        </div>
+        <div class="package-type-controls">
+          <button class="btn btn-add" [innerHTML]="'Ajouter'" (click)="addPackageItem(packageInfo)"></button>
+          <button class="btn btn-duplicate" [innerHTML]="duplicate_button" (click)="duplicatePackageItem(packageInfo)"></button>
+        </div>
+      </div>
+    </div>
+    <div class="form-row package-content-form">
+      <div class="form-text">
+        <p>Votre expédition contient-elle des marchandises dangereuses?</p>
+      </div>
+      <div class="col-md-10">
+        <div class="custom-control
+                    custom-radio
+                    custom-radio-btn
+                    custom-control-inline"
+             [ngClass]="selected_desc ? 'is-checked' : ''">
+          <input type="radio"
+                 id="ordinaryPackage"
+                 formControlName='dangerous'
+                 class="custom-control-input"
+                 value="true">
+          <label class="custom-control-label"
+                 for="ordinaryPackage">
+            Oui
+          </label>
+        </div>
+        <div class="custom-control
+                    custom-radio
+                    custom-radio-btn
+                    custom-control-inline"
+             [ngClass]="!selected_desc ? 'is-checked' : ''">
+          <input type="radio"
+                 id="specialPackage"
+                 formControlName='dangerous'
+                 class="custom-control-input"
+                 value="false">
+          <label class="custom-control-label"
+                 for="specialPackage">
+            Non
+          </label>
+        </div>
+      </div>
+      <div class="col-md-10">
+        <input type="text"
+               class="form-control custom-form-control"
+               id="packageContent"
+               placeholder="Contenu de votre expédition"
+               formControlName="content"
+               [ngClass]="{'red-border': content.hasError('required') && step1form.submitted && content.invalid}">
+          <div class="help-block with-errors"
+               *ngIf=" content.hasError('required') && step1form.submitted && content.invalid">
+              <span>
+                  Veuillez précisez le contenu de votre expédition
+              </span>
+          </div>
+      </div>
+    </div>
+      <div class="package-informations">
+          <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" (panelChange)="checkCollapse($event)">
+              <ngb-panel>
+                  <ng-template ngbPanelTitle>
+                      <span *ngIf="collapsed" class="mr-2 align-middle"><fa-icon [icon]="['fas', 'chevron-up']"></fa-icon></span>
+                      <span *ngIf="!collapsed" class="mr-2 align-middle"><fa-icon [icon]="['fas', 'chevron-down']"></fa-icon></span>
+                      Poids et dimensions maximum autorisés
+                  </ng-template>
+                  <ng-template ngbPanelContent>
+                      <div class="package-rule">
+                          <div class="rule-image">
+                              <img src="assets/img/box-rule.svg" alt="">
+                          </div>
+                          <div class="rule-text">
+                              <h4>Dimensions maximales</h4>
+                              <p>
+                                  Longueur ou largeur ou hauteur : 150 cm maximum (130 cm pour les livraisons à domicile et chez un commerçant partenaire)
+                              </p>
+                              <p>
+                                  Longueur + largeur + hauteur : 220 cm maximum (170 cm pour les livraisons à domicile et chez un commerçant partenaire)
+                              </p>
+                          </div>
+                      </div>
+                      <div class="package-rule">
+                          <div class="rule-image">
+                              <img src="assets/img/weight-rule.svg" alt="">
+                          </div>
+                          <div class="rule-text">
+                              <h4>Poids maximaux</h4>
+                              <p>
+                                  Jusqu'à 30 kg par colis (20 kg pour les livraisons à domicile).
+                              </p>
+                              <p>
+                                  Un contrôle de votre envoi aura lieu avant son acheminement. Si le poids et les dimensions ne sont pas conformes, le colis concerné sera refusé.
+                              </p>
+                          </div>
+                      </div>
+                  </ng-template>
+              </ngb-panel>
+          </ngb-accordion>
+      </div>
+      <div class="button-controls">
+          <button type="button" class="btn black-btn" (click)="resetSetop1Form()">Effacer</button>
+          <button type="submit" class="btn green-btn" [disabled]="submitted">Suivant</button>
+      </div>
+  </form>
+</div>
+</div>
+<ng-template #packageInfo let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title">Sécurité de vos colis</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body package-alert text-center">
+      <img class="package-alert-image" src="assets/img/package_alert.svg" alt="">
+      <p>Pour un meilleur service et une organisation optimale de vos colis, merci de bien
+      identifier vos colis/enveloppes (exemple: les colis assurés, avec des équipements sensibles etc ...)
+         pour permettre aux coursiers aux points relais de bien <b>coller le bordereau propre à chaque colis</b></p>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="green-btn-xs" (click)="modal.close('Close click')">Bien compris</button>
+  </div>
+</ng-template>
+<!--Modal Map Point relais Depart-->
+<div class="modal fade" id="dePointsModalDepart" tabindex="-1" role="dialog" aria-labelledby="dePointsModalDepart" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLongTitle">Dépot en point de proximité</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div id="step-one" *ngIf=show>
+      <app-maps [pointRelais]="pointRelais" (pointRelai)="selectedDepPoint($event)"></app-maps>
+      </div >
+      <div id="step-two" *ngIf=!show  >
+
+        <p>Ville:{{depPointRelai.delegation.name}}</p>
+        <p>Nom de point de relais: {{depPointRelai.name}}</p>
+          <p>Adresse:{{depPointRelai.address}}</p>
+        <p>code postal: {{depPointRelai.delegation.zipCode}}</p>
+        <p>tel:{{depPointRelai.phone}}</p>
+        <p>Heure d'ouvertude :{{depPointRelai.openTime| date:'HH:mm'}}H </p>
+        <p *ngIf="depPointRelai.pauseTime!=null">Pause : {{depPointRelai.pauseTime| date:'HH:mm'}}</p>
+        <p *ngIf="depPointRelai.secondTime">Réouverture à: {{depPointRelai.secondOpen| date:'HH:mm'}} </p>
+        <p>Heure de fermeture :{{depPointRelai.closeTime| date:'HH:mm'}}H </p>
+
+
+      </div>
+    </div>
+    <div class="modal-footer">
+
+      <button type="button" class="btn black-btn-xs" data-dismiss="modal" *ngIf="show">Fermer</button>
+      <button type="button" class="btn black-btn-xs" (click)="previousDepMap()" *ngIf="!show">précédent</button>
+      <button type="button" class="btn green-btn-xs"  (click)="selectDepPoint()" *ngIf=show >Suivant </button>
+      <button type="button" class="btn green-btn-xs"   data-dismiss="modal"  *ngIf=!show>Valider </button>
+    </div>
+  </div>
+</div>
+</div>
+<!--Modal Map Point relais destination-->
+<div class="modal fade" id="dePointsModalArrive" tabindex="-1" role="dialog" aria-labelledby="dePointsModalArrive" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLongTitle1">Dépot en point de proximité</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div id="stepone-des" *ngIf=showdestination>
+
+      <app-maps [pointRelais]="pointRelais" [destinationMap]="true" (pointRelaiDes)="selectedDesPoint($event)" ></app-maps>
+      </div>
+      <div id="steptwo-des" *ngIf=!showdestination  >
+
+        <p >Ville:{{desPointRelai.delegation.name}}</p>
+        <p>Nom de point de relais: {{desPointRelai.name}}</p>
+        <p >Adresse:{{desPointRelai.address}}</p>
+        <p>code postal: {{desPointRelai.delegation.zipCode}}</p>
+        <p>tel:{{desPointRelai.phone}}</p>
+        <p>Heure d'ouvertude :{{desPointRelai.openTime| date:'HH:mm'}}H </p>
+        <p>Heure de fermeture :{{desPointRelai.closeTime| date:'HH:mm'}}H </p>
+
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn black-btn-xs" data-dismiss="modal" *ngIf="showdestination">Fermer</button>
+      <button type="button" class="btn black-btn-xs" (click)="previousDesMap()" *ngIf="!showdestination">précédent</button>
+      <button type="button" class="btn green-btn-xs"  (click)="selectDesPoint()" *ngIf=showdestination >Suivant </button>
+      <button type="button" class="btn green-btn-xs"   data-dismiss="modal"  *ngIf=!showdestination>Valider </button>
+
+    </div>
+
+</div>
+</div></div>

@@ -1,0 +1,33 @@
+  <div class="faq-page">
+    <div class="faq-header">
+      <h2>
+        Foire aux questions
+      </h2>
+      <p>
+        Accueil / F A Q
+      </p>
+    </div>
+
+    <div id="accordion_faq_container" class="container">
+      <div id="accordion_faq">
+        <ng-container *ngFor="let fact of faq; let index = index;">
+          <div class="card">
+            <div class="card-header"  [id]="'heading'+index">
+              <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" attr.data-target="#collapse{{index}}" aria-expanded="true" attr.aria-controls="collapse{{index}}">
+                  {{fact.question}}
+                </button>
+              </h5>
+            </div>
+
+            <div [id]="'collapse'+index" class="collapse " attr.aria-labelledby="heading{{index}}" data-parent="#accordion_faq">
+              <div class="card-body">
+                {{fact.answer}}
+              </div>
+            </div>
+          </div>
+      </ng-container>
+      </div>
+    </div>
+</div>
+

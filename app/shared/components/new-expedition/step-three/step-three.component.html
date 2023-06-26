@@ -1,0 +1,436 @@
+<div class="coordinates-step">
+  <form [formGroup]="form" (ngSubmit)="onSubmit3()" #step3form="ngForm">
+    <!-- email address -->
+    <div class="form-row email-address">
+      <div class="form-group col-md-12" formGroupName="emails">
+        <label class="sender-email" for="sender_email">Votre adresse e-mail</label>
+        <input type="email"
+               class="form-control custom-form-control"
+               formControlName="email"
+               id="sender_email" placeholder="Adresse e-mail*"
+               [ngClass]="{'red-border': userEmail.status==='INVALID' && step3form.submitted }"/>
+        <div class="help-block with-errors"
+             *ngIf=" userEmail.status==='INVALID' && step3form.submitted ">
+                <span>
+                  {{emailError()}}
+                </span>
+        </div>
+        <label class="sr-only" for="confirm_email">confirmer l'adresse e-mail</label>
+        <input type="email"
+               class="form-control custom-form-control"
+               formControlName="confirmEmail"
+               id="confirm_email"
+               placeholder="Confirmer votre adresse e-mail*"
+               [ngClass]="{'red-border': confirmUserEmail.status==='INVALID' && step3form.submitted }"
+        >
+        <div class="help-block with-errors"
+             *ngIf=" confirmUserEmail.status==='INVALID' && step3form.submitted ">
+                <span>
+                  {{confirmError()}}
+                </span>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" formControlName="emailCGU" id="email_cgu">
+          <label class="custom-control-label" for="email_cgu">J'accepte que mon adresse email soit utilisée pour
+            m'envoyer mon panier par email si je ne valide pas ma commande.</label>
+        </div>
+      </div>
+    </div>
+    <!-- adresse point relais -->
+<!--    <div class="text-content" *ngIf="expedition.pickUpMethod==='drop' || expedition.deliveryMethod==='drop'">-->
+<!--      <h3>Adresse point relais </h3>-->
+<!--    </div>-->
+    <!-- adresse point relais depart -->
+    <div class="row physical-address">
+      <div class="col-md-6" formGroupName="expediteur">
+        <div class="form-text" *ngIf="expedition.pickUpMethod==='drop'">
+          <h3>Point relais de départ</h3>
+        </div>
+
+        <div class="form-row disabled-fields">
+          <div class="col-md-4" *ngIf="expedition.pickUpMethod==='drop'">
+            <input type="text" class="form-control custom-form-control" disabled
+                   [value]="expedition.depZipCode"
+                   placeholder="CP"
+            >
+          </div>
+          <div class="col-md-8" *ngIf="expedition.pickUpMethod==='drop'">
+            <input type="text" class="form-control custom-form-control" disabled
+                   [value]="expedition.depCity"
+                   placeholder="Commune">
+          </div>
+        </div>
+      </div>
+      <!-- fin adresse point relais depart -->
+      <!-- point relais destination -->
+      <div class="col-md-6" formGroupName="destinateur">
+        <div class="form-text" *ngIf="expedition.deliveryMethod==='drop'">
+          <h3> Point relais d'arrivé</h3>
+        </div>
+
+        <div class="form-row disabled-fields">
+          <div class="col-md-4" *ngIf="expedition.deliveryMethod==='drop'">
+            <input type="text" class="form-control custom-form-control" disabled
+                   [value]="expedition.desZipCode"
+                   placeholder="CP">
+          </div>
+          <div class="col-md-8" *ngIf="expedition.deliveryMethod==='drop'">
+            <input type="text" class="form-control custom-form-control" disabled
+                   [value]="expedition.desCity"
+                   placeholder="Commune">
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- fin adresse point relais destination -->
+
+    <!-- Physical address -->
+    <div class="text-content">
+      <h3>Adresse</h3>
+    </div>
+    <div class="row physical-address">
+      <div class="col-md-6" formGroupName="expediteur">
+        <div class="form-text">
+          <h3>Adresse de l'expéditeur</h3>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control custom-form-control"
+                 id="sender_last_name" formControlName="firstName"
+                 placeholder="Nom*"
+                 [ngClass]="{'red-border': ExpfirstName.hasError('required') && step3form.submitted && ExpfirstName.invalid}">
+          <div class="help-block with-errors"
+               *ngIf=" ExpfirstName.hasError('required') && step3form.submitted && ExpfirstName.invalid">
+                <span>
+                  Le nom de l'expéditeur est obligatoire
+                </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control custom-form-control"
+                 id="sender_name" formControlName="lastName" placeholder="Prénom*"
+                 [ngClass]="{'red-border': ExplastName.hasError('required') && step3form.submitted && ExplastName.invalid}">
+          <div class="help-block with-errors"
+               *ngIf=" ExplastName.hasError('required') && step3form.submitted && ExplastName.invalid">
+                <span>
+                  Le prénom de l'expéditeur est obligatoire
+                </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control custom-form-control"
+                 id="sender_phone"
+                 formControlName="phoneNumber" placeholder="Téléphone*"
+                 [ngClass]="{'red-border': ExpphoneNumber.hasError('required') && step3form.submitted && ExpphoneNumber.invalid}">
+          <div class="help-block with-errors"
+               *ngIf=" ExpphoneNumber.hasError('required') && step3form.submitted && ExpphoneNumber.invalid">
+                <span>
+                  Le téléphone de l'expéditeur est obligatoire
+                </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control custom-form-control"
+                 id="sender_address"
+                 formControlName="address" placeholder="Adresse*"
+                 [ngClass]="{'red-border': ExpAddress.hasError('required') && step3form.submitted && ExpAddress.invalid}">
+          <div class="help-block with-errors"
+               *ngIf=" ExpAddress.hasError('required') && step3form.submitted && ExpAddress.invalid">
+                <span>
+                  L'adresse de l'expéditeur est obligatoire
+                </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control custom-form-control"
+                 id="sender_address2"
+                 formControlName="complementOfAddress"
+                 placeholder="Complément d'adresse*"
+                 [ngClass]="{'red-border': ExpcomplementOfAddress.hasError('required') && step3form.submitted && ExpcomplementOfAddress.invalid}">
+          <div class="help-block with-errors"
+               *ngIf="ExpcomplementOfAddress.hasError('required') && step3form.submitted && ExpcomplementOfAddress.invalid">
+                <span>
+                  Le complément d'adresse est obligatoire
+                </span>
+          </div>
+        </div>
+        <div class="form-row disabled-fields">
+          <div class="col-md-4 mb-3">
+            <input id="senderCP"
+                   type="text"
+                   class="form-control custom-form-control"
+                   formControlName="zipCode"
+                   placeholder="CP*"/>
+
+            <!--                   [ngClass]="{'red-border':DestzipCode.hasError('required') && step3form.submitted && DestzipCode.invalid}"/>-->
+
+            <!--  <div class="help-block with-errors"
+                   *ngIf=" z.hasError('required') && step3form.submitted && DestzipCode.invalid">
+                                          <span>
+                                              Entrez un code postal valide
+                                          </span>
+              </div>-->
+          </div>
+          <div class="col-md-8 mb-3">
+            <input id="senderGouvernorat"
+                   type="text"
+                   class="form-control custom-form-control"
+                   formControlName="municipality"
+                   [ngbTypeahead]=" search"
+                   [resultTemplate]="rt"
+                   [inputFormatter]="formatter"
+                   (blur)="depGov()"
+                   placeholder="Commune*"
+                   [value]="dep_model.name"
+                               [ngClass]="{'red-border': ExpMunicipality.hasError('required') && step3form.submitted && ExpMunicipality.invalid}">
+            <div class="help-block with-errors"
+                 *ngIf=" ExpMunicipality.hasError('required') && step3form.submitted && ExpMunicipality.invalid">
+                <span>
+                  Le Commune du destinataire est obligatoire
+                </span>
+            </div>
+
+
+            <ng-template #rt let-r="result" let-t="term">
+              <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+            </ng-template>
+            <div class="help-block with-errors"
+                 *ngIf="httpError.code == 401">
+                  <span>
+                      Le parcours est non supporté par la coopérative
+                  </span>
+            </div>
+            <div class="help-block with-errors"
+                 *ngIf=" DestMunicipality.hasError('required') && step3form.submitted &&DestMunicipality.invalid">
+                                        <span>
+                                            Entrez une commune valide
+                                        </span>
+            </div>
+          </div>
+        </div>
+        <div class="form-row" *ngIf="expedition.senderType=== 'professional'">
+          <div class="col-md-4">
+            <input type="text" class="form-control custom-form-control"
+                   id="senderCompanyName"
+                   placeholder="Nom de la societé"
+                   formControlName="companyName"
+            >
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control custom-form-control"
+                   id="tva_code"
+                   formControlName="vatNumber"
+                   placeholder="Numéro TVA">
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-6" formGroupName="destinateur">
+        <div class="form-text">
+          <h3>Adresse du destinataire</h3>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control custom-form-control"
+                 id="receiver_last_name"
+                 formControlName="firstName"
+                 placeholder="Nom*"
+                 [ngClass]="{'red-border': DestfirstName.hasError('required') && step3form.submitted && DestfirstName.invalid}">
+          <div class="help-block with-errors"
+               *ngIf=" DestfirstName.hasError('required') && step3form.submitted && DestfirstName.invalid">
+                <span>
+                  Le nom du destinataire est obligatoire
+                </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control custom-form-control"
+                 id="receiver_name"
+                 formControlName="lastName"
+                 placeholder="Prénom*"
+                 [ngClass]="{'red-border': DestlastName.hasError('required') && step3form.submitted && DestlastName.invalid}">
+          <div class="help-block with-errors"
+               *ngIf=" DestlastName.hasError('required') && step3form.submitted && DestlastName.invalid">
+                <span>
+                  Le prénom du destinataire est obligatoire
+                </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control custom-form-control"
+                 id="receiver_email"
+                 formControlName="email"
+                 placeholder="email*"
+                 [ngClass]="{'red-border': DestEmail.status==='INVALID' && step3form.submitted }">
+          <div class="help-block with-errors"
+               *ngIf=" DestEmail.status==='INVALID' && step3form.submitted ">
+                <span>
+                  {{destemailError()}}
+                </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control custom-form-control"
+                 id="receiver_phone"
+                 formControlName="phoneNumber"
+                 placeholder="Téléphone*"
+                 [ngClass]="{'red-border': DestphoneNumber.hasError('required') && step3form.submitted && DestphoneNumber.invalid}">
+          <div class="help-block with-errors"
+               *ngIf=" DestphoneNumber.hasError('required') && step3form.submitted && DestphoneNumber.invalid">
+                <span>
+                  Le téléphone du destinataire est obligatoire
+                </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control custom-form-control"
+                 id="receiver_address"
+                 formControlName="address"
+                 placeholder="Adresse*"
+                 [ngClass]="{'red-border': DestAddress.hasError('required') && step3form.submitted && DestAddress.invalid}">
+          <div class="help-block with-errors"
+               *ngIf=" DestAddress.hasError('required') && step3form.submitted && DestAddress.invalid">
+                <span>
+                  L'adresse du destinataire est obligatoire
+                </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control custom-form-control"
+                 id="receiver_address2"
+                 formControlName="complementOfAddress"
+                 placeholder="Complément d'adresse*"
+                 [ngClass]="{'red-border': DestcomplementOfAddress.hasError('required') && step3form.submitted && DestcomplementOfAddress.invalid}">
+          <div class="help-block with-errors"
+               *ngIf=" DestcomplementOfAddress.hasError('required') && step3form.submitted && DestcomplementOfAddress.invalid">
+                <span>
+                  Le complément d'adresse du destinataire est obligatoire
+                </span>
+          </div>
+        </div>
+        <div class="form-row disabled-fields">
+          <div class="col-md-4">
+            <input type="text" class="form-control custom-form-control"
+                   id="receiver_zipCode"
+                   formControlName="zipCode"
+                   placeholder="CP*">
+          </div>
+          <div class="col-md-8 mb-3">
+            <input id="receiverGovernorat"
+                   type="text"
+                   class="form-control custom-form-control"
+
+                   formControlName="municipality"
+                   placeholder="Commune*"
+                   [ngbTypeahead]="search"
+                   [resultTemplate]="rt"
+                   [inputFormatter]=" formatter"
+                   (blur)="recGov()"
+                   [value]="dest_model.name"
+                   [ngClass]="{'red-border':DestMunicipality.hasError('required') && step3form.submitted && DestMunicipality.invalid}"
+
+
+            />
+            <div class="help-block with-errors"
+                 *ngIf=" DestMunicipality.hasError('required') && step3form.submitted && DestMunicipality.invalid">
+                <span>
+                  Le Commune du destinataire est obligatoire
+                </span>
+            </div>
+
+            <ng-template #rt let-r="result" let-t="term">
+              <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+            </ng-template>
+            <div class="help-block with-errors"
+                 *ngIf=" DestMunicipality.hasError('required') && step3form.submitted && DestMunicipality.invalid">
+                                        <span>
+                                            Entrez une commune valide
+                                        </span>
+            </div>
+          </div>
+        </div>
+        <div class="form-row" *ngIf="expedition.destinationType === 'professional'">
+          <div class="col-md-4">
+            <input type="text" class="form-control custom-form-control"
+                   id="reciverCompanyName"
+                   placeholder="Nom de la societé"
+                   formControlName="companyName"
+            >
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control custom-form-control"
+                   id="tva_code_pro"
+                   formControlName="vatNumber"
+                   placeholder="Numéro TVA">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox"
+               class="custom-control-input"
+               formControlName="factAddressCheckBox"
+               id="addF"
+        >
+        <label class="custom-control-label" for="addF">
+          Ajouter une address de facturation
+        </label>
+      </div>
+    </div>
+    <div class="row" *ngIf="addFact">
+      <div class="clo-md-6" formGroupName="factAddress">
+        <div class="form-text">
+          <h3>Adresse du facturation</h3>
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control custom-form-control"
+                 id="facturation_address"
+                 formControlName="address"
+                 placeholder="Adresse*">
+          <!--          <div class="help-block with-errors"-->
+          <!--               *ngIf=" DestAddress.hasError('required') && step3form.submitted && DestAddress.invalid">-->
+          <!--                <span>-->
+          <!--                  L'adresse du destinataire est obligatoire-->
+          <!--                </span>-->
+          <!--          </div>-->
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control custom-form-control"
+                 id="facturation_address2"
+                 formControlName="complementOfAddress"
+                 placeholder="Complément d'adresse*"
+          >
+          <!--          <div class="help-block with-errors"-->
+          <!--               *ngIf=" DestcomplementOfAddress.hasError('required') && step3form.submitted && DestcomplementOfAddress.invalid">-->
+          <!--                <span>-->
+          <!--                  Le complément d'adresse du destinataire est obligatoire-->
+          <!--                </span>-->
+          <!--          </div>-->
+        </div>
+        <div class="form-row">
+          <div class="col-md-4">
+            <input type="text" class="form-control custom-form-control"
+                   id="facturation_zipCode"
+                   formControlName="zipCode"
+                   placeholder="CP">
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control custom-form-control"
+                   id="facturation_gov"
+                   formControlName="municipality"
+                   placeholder="Commune">
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+    <div class="button-controls">
+      <button type="button" class="btn black-btn" (click)="goTop()" awPreviousStep>Précédent</button>
+      <button type="submit" class="btn green-btn" [disabled]="submitted3">Suivant</button>
+    </div>
+  </form>
+</div>
+

@@ -1,0 +1,319 @@
+.confirmation-step {
+  .green-title {
+    text-transform: uppercase;
+    color: $green-1;
+    font-family: $bold-font;
+    font-size: 18px;
+    @include media-breakpoint-down(md) {
+      font-size: 16px;
+    }
+    @include media-breakpoint-down(sm) {
+      font-size: 14px;
+    }
+  }
+  p {
+    font-size: 16px;
+    font-family: $medium-font;
+    margin-bottom: 4px;
+    span {
+      font-size: 16px;
+      font-family: $medium-font;
+    }
+  }
+  .expedition-reference {
+    font-family: $bold-font;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: $black-1;
+    margin-bottom: 12px;
+    @include media-breakpoint-down(md) {
+      font-size: 16px;
+    }
+    @include media-breakpoint-down(sm) {
+      font-size: 14px;
+    }
+    span {
+      text-transform: uppercase;
+      color: $green-1;
+      font-family: $bold-font;
+      font-size: 18px;
+      @include media-breakpoint-down(md) {
+        font-size: 16px;
+      }
+      @include media-breakpoint-down(sm) {
+        font-size: 14px;
+      }
+    }
+  }
+  .picking-type,
+  .departure-address,
+  .delivery-type,
+  .destination-address {
+    margin-bottom: 12px;
+  }
+  .billing-block {
+      span.service-type {
+        font-family: $bold-font;
+    }
+  }
+  .custom-table {
+    h3 {
+      font-size: 18px;
+      text-transform: uppercase;
+      @include media-breakpoint-down(md) {
+        font-size: 16px;
+      }
+      @include media-breakpoint-down(sm) {
+        font-size: 14px;
+      }
+    }
+    thead {
+      tr {
+        padding-left: 0;
+        padding-right:0;
+        th {
+          padding-left: 0;
+          padding-right:0;
+          &:last-child {
+            text-align: right;
+          }
+        }
+      }
+    }
+    tbody {
+      tr {
+        padding-left: 0;
+        padding-right:0;
+        background-color: transparent;
+        border: 0;
+        td {
+          border: 0;
+          padding-left: 0;
+          padding-right:0;
+          font-family: $medium-font;
+          vertical-align: top;
+          &:last-child {
+            text-align: right;
+          }
+          .price {
+            font-size: 16px;
+            font-family: $bold-font;
+            @include media-breakpoint-down(sm) {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+    @include media-breakpoint-down(md){
+      border: 0;
+      tbody tr td {
+        border-bottom: 1px solid $border-color;
+      }
+      caption {
+        font-size: 1.3em;
+      }
+      thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+      }
+      tr {
+        background-color: #fff;
+        display: block;
+        margin-bottom: .625em;
+        border: 1px solid $border-color;
+      }
+      td {
+        border-bottom: 1px solid $border-color;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+        border-top: 0;
+        &:before {
+          content: attr(data-label);
+          float: left;
+          font-weight: bold;
+          text-transform: uppercase;
+          color: $black-1;
+          background-color: $gray-8;
+          padding-right: 15px;
+          @media (max-width: 400px) {
+            display: block;
+            width: 100%;
+            text-align: left;
+          }
+        }
+        &:last-child {
+          border-bottom: 0;
+        }
+      }
+    }
+  }
+  .total-expedition {
+    tbody {
+      tr {
+        td {
+          .expedition-price {
+            margin-top: 30px;
+            .display-mode {
+              display: flex;
+              h3 {
+                font-family: $medium-font;
+                width: 50%;
+                margin-bottom: 4px;
+                @include media-breakpoint-down(sm) {
+                  text-align: left;
+                }
+              }
+              p {
+                font-family: $bold-font;
+                width: 50%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .additional-services {
+    tbody {
+      tr {
+        td {
+          &:first-child {
+            @include media-breakpoint-down(sm) {
+              &:before {
+                display: block;
+                width: 100%;
+                text-align: left;
+              }
+              text-align: left;
+            }
+          }
+          .package-item {
+            margin: 0;
+            padding-top: 4px;
+            li {
+              width: 16%;
+              margin: 0;
+              vertical-align: top;
+              @include media-breakpoint-down(md) {
+                width: 20%;
+                &:first-child {
+                  display: block;
+                  width: 100%;
+                }
+              }
+              &:not(:first-child) {
+                text-align: right;
+                padding-left: 0;
+                .description {
+                  font-size: 12px;
+                }
+                @include media-breakpoint-down(sm) {
+                  display: block;
+                  width: 100%;
+                }
+              }
+              .package-name {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .additional-services, .delivery-service {
+    thead {
+      tr {
+        th {
+          &:first-child {
+            @include media-breakpoint-up(md) {
+              width: calc(100% - 150px);
+            }
+          }
+          &:last-child {
+            @include media-breakpoint-up(md) {
+              width: 150px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .button-controls {
+    text-align: right;
+    margin-top: 20px;
+    button {
+      margin-bottom: 10px;
+      &:last-child {
+        margin-left: 18px;
+        @media(max-width: 400px) {
+          margin-left: 0;
+        }
+      }
+    }
+    @media (max-width: 400px) {
+      button{
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+  .billing-header {
+    margin-bottom: 50px;
+    .img-container {
+      img {
+        max-width: 300px;
+        max-height: 50px;
+      }
+      margin-bottom: 30px;
+    }
+    .company-address {
+      p {
+        span {
+          font-family: $bold-font;
+        }
+      }
+    }
+    .billing-number {
+      flex-direction: column;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      height: 100%;
+      position: relative;
+      h3 {
+        font-family: $bold-font;
+        text-align: right;
+        text-transform: uppercase;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      .billing-details {
+
+      }
+    }
+  }
+  .billing-content {
+    .from, .sent-to {
+      h2 {
+        font-family: $bold-font;
+        font-size: 18px;
+        text-transform: uppercase;
+        color: $black-1;
+        margin-bottom: 12px;
+      }
+      p {
+
+      }
+    }
+  }
+}

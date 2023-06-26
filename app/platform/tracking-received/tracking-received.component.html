@@ -1,0 +1,151 @@
+<div class="page-title">
+  <h3>
+    Suivi Des Commandes
+  </h3>
+  <p>
+    Suivi toute la liste de vos colis en progress  en détail
+  </p>
+</div>
+<!-- tables -->
+<div class="row">
+  <div class="col-12">
+    <div class="main-bloc">
+      <div class="box">
+        <div class="row">
+          <div class="col-sm-4">
+            <div [formGroup]="listForm">
+              <select formControlName="list" (change)="changeListNumber()"
+                      class="custom-select-sm sort-select">
+                <option value="5" selected>Afficher par 5</option>
+                <option value="10">Afficher par 10</option>
+                <option value="15">Afficher par 15</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div [formGroup]="listForm">
+              <select formControlName="list" (change)="changeListNumber()"
+                      class="custom-select-sm sort-select">
+                <option value="5" selected>Afficher par date</option>
+                <option value="10">Afficher par statut</option>
+              </select>
+            </div>
+              </div>
+          <div class="col-sm-4">
+            <div class="search-container">
+              <div class="search-input input-group mb-3">
+                <input type="text" class="form-control" placeholder="Recherche ..." aria-label="Search" [(ngModel)]="expeditionFilter.publicCode"
+                       aria-describedby="basic-addon1" >
+              </div>
+            </div>
+          </div>
+          <div class="table-container table-responsive">
+            <table class="table table-striped general-table campaign-table">
+              <thead>
+              <tr>
+                <th scope="col" (click)="sort('publicCode')">Référence
+                  <span class="glyphicon sort-icon" *ngIf="key ==='publicCode'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+
+                </th>
+                <th scope="col" (click)="sort('createdAt')">Date de création
+                  <span class="glyphicon sort-icon" *ngIf="key ==='createdAt '" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+
+                </th>
+                <th scope="col">état</th>
+                <th scope="col">Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <!--<tr *ngIf="expeditions.length===0">-->
+              <!--<td colspan="4" class="no-results">-->
+              <!--Aucune expedition trouvée-->
+              <!--</td>-->
+              <!--</tr>-->
+              <ng-container *ngFor="let expedition of expeditions | orderBy: key : reverse |filterBy: expeditionFilter | paginate: { itemsPerPage: nbrPerPage ,currentPage: p } ; let i = index">
+                <tr>
+
+                  <td> {{expedition.publicCode}}</td>
+                  <td> {{expedition.createdAt | date : 'd' }} /{{expedition.createdAt | date : 'M' }} /{{expedition.createdAt | date : 'y' }} </td>
+                  <td>
+                    <span class="success">En progression </span>
+                  </td>
+                  <td class="text-center arrow-container">
+                                                <span data-toggle="collapse" [attr.data-target]="'#advaccordion_'+ i" aria-expanded="false"
+                                                      class="info-collapse">
+                                                    Détail
+                                                </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4" class="mobile-td-table">
+                    <div id="advaccordion_{{i}}" class="collapse">
+                      <div class="td-content text-left">
+                        <div>
+                          <b>Type de Service: </b>
+                          <span  *ngIf="expedition.deliveryService === 'express';">Express</span>
+                          <span  *ngIf="expedition.deliveryService === 'quick';">Rapide</span>
+                          <span  *ngIf="expedition.deliveryService === 'economic';">Économique</span>
+                        </div>
+                        <div>
+                          <b>Destination :</b>
+                          <span>
+                             {{expedition.desCity + ' ' + expedition.desZipCode}}
+                             </span>
+                        </div>
+                        <div>
+                          <b>Type Colis:</b>
+                          <span>
+                             {{expedition.packageType}}
+                            </span>
+                        </div>
+                        <div *ngFor="let package of expedition.packages; let pk = index">
+                            <b>item {{pk+1}}:</b>
+                          <span>
+                            <b>Largeur: </b>{{package.width}} cm
+                            <b>Longueur: </b>{{package.length}} cm
+                            <b>Hauteur: </b>{{package.height}} cm
+                            <b>Poids: </b>{{package.weight}} Kg
+                          </span>
+                        </div>
+                        <div>
+                          <b>Poids Total (Kg):</b>
+                          <span>
+                            {{expedition.packagesWeight()}}Kg
+                            </span>
+                        </div>
+                        <div class="text-right mt-2">
+                          <button class="btn green-rounded-btn  mb-2" (click)="goToSuiviColis(expedition.publicCode)">
+                            <fa-icon [icon]="['fas', 'map-marker-alt']"></fa-icon>
+                            Tracking
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+              </ng-container>
+              <ng-template [ngIf]="(expeditions | filterBy: expeditionFilter).length === 0 ">
+                <tr>
+                  <td colspan="4" class="no-results">
+                    Aucune expedition trouvée
+                  </td>
+                </tr>
+              </ng-template>
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination-container" *ngIf="expeditions.length>0">
+            <div class="col-lg-12 d-flex">
+              <ul class="pagination mx-auto">
+                <pagination-controls
+                  previousLabel=""
+                  nextLabel=""
+                  (pageChange)="p = $event"></pagination-controls>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

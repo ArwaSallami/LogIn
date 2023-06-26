@@ -1,0 +1,66 @@
+.faq-page {
+  .faq-header {
+    background-image: url("assets/img/support-bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: #fff;
+    padding: 50px 0;
+    h2 {
+      font-family: $bold-font;
+      font-size: 36px;
+      text-transform: uppercase;
+      margin-bottom: 0;
+      padding: 0 10px;
+      @include media-breakpoint-down(sm) {
+        font-size: 28px;
+      }
+    }
+    p {
+      font-family: $regular-font;
+      font-size: 18px;
+      margin: 0;
+      padding: 0 10px;
+      @include media-breakpoint-down(sm) {
+        font-size: 16px;
+      }
+    }
+  }
+  #accordion_faq_container {
+    padding-top: 98px;
+    padding-bottom: 120px;
+  }
+  button.btn.btn-link {
+    border: solid 1px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    border-radius: 0;
+    text-decoration: none !important;
+    background: #61b67a;
+    color: #fff;
+    padding: 14px 10px;
+}
+
+.card-header {
+    padding: 0;
+    border-radius: 0;
+}
+
+.card {
+    border-radius: 0;
+}
+
+  .contact-bloc {
+    @include media-breakpoint-down(sm) {
+      .contact-title {
+        font-size: 28px;
+      }
+      .contact-description {
+        font-size: 16px;
+      }
+    }
+
+  }
+}

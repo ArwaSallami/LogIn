@@ -1,0 +1,95 @@
+<div class="footer-bloc">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="logo-footer">
+                    <img src="{{logoUrl}}" alt="">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="info-bloc">
+                    <h4 class="info-title">
+                        {{firstBloc.title}}
+                    </h4>
+                    <ul class="list-unstyled info-list">
+                        <li>
+                            <p>
+                                <fa-icon icon="map-marker-alt"></fa-icon>
+                                {{firstBloc.localisation}}
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+
+                                <fa-icon icon="phone"  rotate="90"></fa-icon>
+                                {{firstBloc.tel}}
+                            </p>
+                        </li>
+                      <li>
+                        <p>
+                          <fa-icon icon="phone"></fa-icon>
+                          {{firstBloc.fax}}
+                        </p>
+                      </li>
+                        <li>
+                            <p>
+                                <fa-icon icon="at"></fa-icon>
+                                {{firstBloc.email}}
+                            </p>
+                        </li>
+                        <li>
+                            <ul class="list-inline social-list">
+                                <li class="list-inline-item">
+                                  <a href="https://www.facebook.com/LogIn-Tunisie-111211251159813"> <fa-icon [icon]="['fab', 'facebook-square']"></fa-icon></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <fa-icon [icon]="['fab', 'twitter-square']"></fa-icon>
+                                </li>
+                                <li class="list-inline-item">
+                                    <fa-icon [icon]="['fab', 'google-plus-square']"></fa-icon>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="top-offer-bloc">
+                    <h4 class="top-offer-title">
+                        {{secondBloc.title}}
+                    </h4>
+                    <ul class="list-unstyled top-offer-list">
+                        <li *ngFor="let offer of secondBloc.services">
+                            <p>
+                                {{offer.service}}
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="opening-bloc">
+                    <h4 class="opening-title">
+                        {{thirdBloc.title}}
+                    </h4>
+                    <ul class="list-unstyled opening-list">
+                        <li *ngFor="let hour of thirdBloc.services">
+                            <p>
+                                <fa-icon icon="clock"></fa-icon>
+                                {{hour.service}}
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-12 text-center">
+                <div class="copyright">
+                    <p>
+                        {{copyright}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

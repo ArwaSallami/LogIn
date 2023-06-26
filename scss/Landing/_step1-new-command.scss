@@ -1,0 +1,154 @@
+.description-step {
+  .text-content {
+    margin-bottom: 38px;
+    h3 {
+      font-family: $bold-font;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+    p {
+      font-family: $regular-font;
+      font-size: 14px;
+    }
+  }
+  .form-row {
+    .text-content {
+      margin-top: 30px;
+    }
+  }
+  .description-form {
+    .departure-package {
+      .custom-radio-btn {
+        margin-bottom: 24px;
+      }
+    }
+    .arrival-package {
+      .custom-radio-btn {
+        margin-bottom: 24px;
+      }
+    }
+    .expedition-date {
+      margin-bottom: 53px;
+      .expedition-datepicker {
+        width: 100%;
+        .expedition-label {
+          padding-right: 25px;
+          font-size: 18px;
+        }
+      }
+    }
+    .package-dimensions {
+      .custom-radio-btn {
+        margin-bottom: 24px;
+      }
+    }
+    .package-type-form {
+      .package-type-item {
+        margin-bottom: 10px;
+        .btn-icon {
+          color: $red-2;
+          font-size: 18px;
+        }
+      }
+    }
+    .package-type-controls {
+      margin-bottom: 18px;
+    }
+    .package-content-form {
+      .custom-radio-btn {
+        margin-bottom: 24px;
+      }
+    }
+    .package-informations {
+      margin-top: 24px;
+      .accordion {
+        .card {
+          border: 2px dashed $green-1;
+          .card-header {
+            background-color: #fff;
+            border: none;
+            h5 {
+              button {
+                width: 100%;
+                text-align: left;
+                text-decoration: none;
+                color: $black-1;
+                font-size: 18px;
+                text-transform: uppercase;
+              }
+            }
+          }
+          .collapse {
+            .card-body {
+              .package-rule {
+                display: flex;
+                margin-bottom: 16px;
+                .rule-image {
+                  width: 80px;
+                  img {
+                    display: block;
+                    max-width: 75px;
+                    width: 100%;
+                    height: auto;
+                  }
+                }
+                .rule-text {
+                  width: calc(100% - 80px);
+                  h4 {
+                    color: $green-1;
+                    font-size: 16px;
+                    font-family: $medium-font;
+                  }
+                  p {
+                    font-size: 14px;
+                    font-family: $regular-font;
+                    margin-bottom: 8px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .button-controls {
+      text-align: right;
+      margin-top: 20px;
+      button {
+        margin-bottom: 10px;
+        &:last-child {
+          margin-left: 18px;
+          @media(max-width: 400px) {
+            margin-left: 0;
+          }
+        }
+      }
+      @media (max-width: 400px) {
+        button{
+          display: block;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+.rely-notif {
+  padding-top: 15px;
+  color: red;
+}
+.custom-rely{
+
+    border: 2px dashed #fe3f4c;
+    text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+    margin-bottom: 5%;
+    background-color: rgba(254, 63, 76, 0.05);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    /* padding-top: 1px; */
+    margin-top: 15px;
+  }
+

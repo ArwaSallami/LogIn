@@ -1,0 +1,10 @@
+<div *ngIf="isConfirmed" class="account-confirmation">
+  <img src="assets/img/check-lg.png" alt="">
+  <p>Félicitations, votre compte a été activé. Connectez-vous à votre espace client.</p>
+  <a routerLink="/login" class="green-btn">Se connecter</a>
+</div>
+<div *ngIf="!isConfirmed" class="account-confirmation">
+  <img src="assets/img/cross-error.svg" alt="">
+  <p>Votre compte n'est pas activé. Accédez à votre boite mail (vérifiez dans spams).</p>
+  <a routerLink="/register"  class="green-btn">S'inscrir</a>
+</div>

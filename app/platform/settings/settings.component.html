@@ -1,0 +1,368 @@
+<div class="page-title">
+  <h3>
+    Mon Profil {{user.accountType}}
+  </h3>
+  <p>
+    Gérez votre profil en toute sécurité
+  </p>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="main-bloc">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="box">
+            <p class="box-header">Compte
+              <i class="bar-icon"></i>
+            </p>
+            <form [formGroup]="form" (ngSubmit)="onUpdate()" >
+              <div class="alert alert-danger"
+                     *ngIf="form.errors">
+                Champs invalides
+              </div>
+              <div class="alert alert-danger"
+                   *ngIf="errorMsg">
+                {{ errorMsg }}
+              </div>
+              <div class="alert alert-success"
+                   *ngIf="accountMsg">
+                {{ accountMsg }}
+              </div>
+              <div class="contact-form">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="firstName">
+                        Prénom:
+                      </label>
+                      <input
+                              formControlName="firstName"
+                              id="firstName"
+                              type="text"
+                              class="form-control"
+                              placeholder="Prenom"
+                              [ngClass]="{'red-border': firstName.invalid && (firstName.dirty || firstName.touched)}"
+                      >
+                      <div class="help-block with-errors"
+                           *ngIf=" firstName.invalid && (firstName.dirty || firstName.touched)">
+                  <span>
+                    Entrez Votre prénom
+                  </span>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="lastName">
+                        Nom:
+                      </label>
+                      <input
+                              formControlName="lastName"
+                              id="lastName"
+                              type="text"
+                              class="form-control"
+                              placeholder="Nom"
+                              [ngClass]="{'red-border': lastName.invalid && (lastName.dirty || lastName.touched)}"
+                      >
+                      <div class="help-block with-errors"
+                           *ngIf=" lastName.invalid && (lastName.dirty || lastName.touched)">
+                  <span>
+                    Entrez Votre Nom
+                  </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="phoneNumber">
+                      N° Téléphone:
+                    </label>
+                    <input
+                            formControlName="phoneNumber"
+                            id="phoneNumber"
+                            type="text"
+                            class="form-control"
+                            placeholder="N° Téléphone"
+                            [ngClass]="{'red-border': phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)}"
+                    >
+                    <div class="help-block with-errors"
+                         *ngIf=" phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)">
+                  <span>
+                    Entrez Votre numero de telephone
+                  </span>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="address">
+                      Adresse:
+                    </label>
+                    <input
+                            formControlName="address"
+                            id="address"
+                            type="text"
+                            class="form-control"
+                            placeholder="address"
+                            [ngClass]="{'red-border': address.invalid && (address.dirty || address.touched)}"
+                    >
+                    <div class="help-block with-errors"
+                         *ngIf=" address.invalid && (address.dirty || address.touched)">
+                  <span>
+                    Entrez Votre address
+                  </span>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="city">
+                      Ville:
+                    </label>
+                    <input
+                            formControlName="city"
+                            id="city"
+                            type="text"
+                            class="form-control"
+                            placeholder="Ville"
+                            [ngClass]="{'red-border': city.invalid && (city.dirty || city.touched)}"
+                    >
+                    <div class="help-block with-errors"
+                         *ngIf=" city.invalid && (city.dirty || city.touched)">
+                  <span>
+                    Entrez Votre ville
+                  </span>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="zipCode">
+                      Code Postal:
+                    </label>
+                    <input
+                            formControlName="zipCode"
+                            id="zipCode"
+                            type="text"
+                            class="form-control"
+                            placeholder="code postale"
+                            [ngClass]="{'red-border': zipCode.invalid && (zipCode.dirty || zipCode.touched)}"
+                    >
+                    <div class="help-block with-errors"
+                         *ngIf=" zipCode.invalid && (zipCode.dirty || zipCode.touched)">
+                  <span>
+                    Entrez Votre code postale
+                  </span>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+                <div class="button-controls text-right mt-4">
+                  <button [disabled]="!form.valid || isSubmitting"
+                          type="submit" class="btn green-rounded-btn">
+                  <span>
+                  <fa-icon class="display-none" [ngClass]="{
+                        'rotating': isSubmitting
+                        }" [icon]="['fas', 'spinner']"></fa-icon>
+                </span>
+                    Valider
+
+                  </button>
+                </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="row">
+            <div class="col-lg-12">
+          <div class="box">
+            <p class="box-header">Sécurité
+              <i class="bar-icon"></i>
+            </p>
+            <form [formGroup]="passwordForm" (ngSubmit)="onChangePasswoed()">
+              <div class="alert alert-danger"
+                   *ngIf="passwordForm.errors">
+                Champs invalides
+              </div>
+              <div class="alert alert-danger"
+                   *ngIf="passwordError">
+                {{ passwordError }}
+              </div>
+              <div class="alert alert-success"
+                   *ngIf="passwordMsg">
+                {{ passwordMsg }}
+              </div>
+              <div class="contact-form">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="oldPassword">
+                        Mot de passe actuel:
+                      </label>
+                      <input
+                              formControlName="oldPassword"
+                              id="oldPassword"
+                              type="password"
+                              class="form-control"
+                              [ngClass]="{'red-border': oldPassword.invalid && (oldPassword.dirty || oldPassword.touched)}"
+                      >
+                      <div class="help-block with-errors"
+                           *ngIf=" oldPassword.invalid && (oldPassword.dirty || oldPassword.touched)">
+                  <span>
+                    Entrez Votre mot de passe
+                  </span>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="newPassword">
+                        Nouveau Mot de passe
+                      </label>
+                      <input
+                              formControlName="newPassword"
+                              id="newPassword"
+                              type="password"
+                              class="form-control"
+                              [ngClass]="{'red-border': newPassword.invalid && (newPassword.dirty || newPassword.touched)}"
+                      >
+                      <div class="help-block with-errors"
+                           *ngIf=" newPassword.invalid && (newPassword.dirty || newPassword.touched)">
+                  <span>
+                    Entrez Votre nouveau mot de passe
+                  </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+                <div class="button-controls text-right mt-4">
+                  <button [disabled]="!passwordForm.valid || isSubmitting" type="submit"
+                          class="btn green-rounded-btn">
+                    <span>
+                  <fa-icon class="display-none" [ngClass]="{
+                        'rotating': isUpdating
+                        }" [icon]="['fas', 'spinner']"></fa-icon>
+                </span>
+                    Mettre à jour
+                  </button>
+                </div>
+
+            </form>
+
+          </div>
+            </div>
+            <div class="col-lg-12" *ngIf="user.accountType === 'pro' ">
+              <div class="box">
+                <p class="box-header">professionnel
+                  <i class="bar-icon"></i>
+                </p>
+                <form [formGroup]="proForm" (ngSubmit)="onUpdatePro()" >
+                  <div class="alert alert-danger"
+                       *ngIf="proForm.errors">
+                    Champs invalides
+                  </div>
+                  <div class="alert alert-danger"
+                       *ngIf="updateProMsgError">
+                    {{ updateProMsgError }}
+                  </div>
+                  <div class="alert alert-success"
+                       *ngIf="updateProMsg">
+                    {{ updateProMsg }}
+                  </div>
+                  <div class="contact-form">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="companyName">
+                            Nom de la societe:
+                          </label>
+                          <input
+                            formControlName="companyName"
+                            id="companyName"
+                            type="text"
+                            class="form-control"
+                            [ngClass]="{'red-border': companyName.invalid && (companyName.dirty || companyName.touched)}"
+                          >
+                          <div class="help-block with-errors"
+                               *ngIf=" companyName.invalid && (companyName.dirty || companyName.touched)">
+                  <span>
+                    Entrez Votre nom de societe
+                  </span>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="vatNumber">
+                            Numéro TVA
+                          </label>
+                          <input
+                            formControlName="vatNumber"
+                            id="vatNumber"
+                            type="text"
+                            class="form-control"
+                            [ngClass]="{'red-border': vatNumber.invalid && (vatNumber.dirty || vatNumber.touched)}"
+                          >
+                          <div class="help-block with-errors"
+                               *ngIf=" vatNumber.invalid && (vatNumber.dirty || vatNumber.touched)">
+                  <span>
+                    Entrez numero de TVA
+                  </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+
+
+                      <label>Patente </label>
+<!--                      <img [src]="imageSrc" style="max-width:300px;max-height:300px"/>-->
+                          <input type="file" name="imageUrl"  accept= "image/*" (change)="handleInputChange($event)"  />
+                        </div>
+                    </div>
+                    </div>
+
+                  </div>
+                  <div class="button-controls text-right mt-4">
+                    <button [disabled]="!proForm.valid || isUpdatePro" type="submit"
+                            class="btn green-rounded-btn">
+                    <span>
+                  <fa-icon class="display-none" [ngClass]="{
+                        'rotating': isUpdatePro
+                        }" [icon]="['fas', 'spinner']"></fa-icon>
+                </span>
+                      Mettre à jour
+                    </button>
+                  </div>
+
+                </form>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

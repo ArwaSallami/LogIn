@@ -1,0 +1,300 @@
+<div class="tarification-detail">
+  <!-- Expedition date -->
+  <form [formGroup] = "step2_form" (ngSubmit)="onSubmit2()" #step2form="ngForm">
+    <div class="form-row">
+      <div class="info-alert" *ngIf="this.expedition.pickUpMethod==='drop'">
+        <div class="rule-image">
+          <img src="assets/img/danger.svg" alt="">
+        </div>
+        <div class="rule-text">
+          <p>Les commandes envoyeés au point relais de départ doivent étre pré emballées. n'oublie pas d'imprime le bordereau .</p>
+        </div>
+
+
+
+      </div>
+
+
+      <div class="col-12 text-content">
+        <h3>Services disponibles</h3>
+        <p>Choisissez le service qui vous convient</p>
+      </div>
+      <div class="col-md-5 available-offers">
+        <div class="custom-control custom-radio custom-radio-btn custom-control-inline"
+             [ngClass]="selected_service === 'economic' ? 'is-checked' : ''">
+          <input type="radio"
+                 id="ecoService"
+                 formControlName='deliveryService'
+                 class="custom-control-input"
+                 value="economic">
+          <label class="custom-control-label"
+                 for="ecoService">
+        <span class="service-label">
+          <span class="text">
+            Service Economique
+          </span>
+          <span class="price" >
+            {{calcDec(price.economicPrice.totalExVat)}}
+          </span>
+        </span>
+          </label>
+        </div>
+        <div class="custom-control custom-radio custom-radio-btn custom-control-inline"
+             [ngClass]="selected_service === 'quick' ? 'is-checked' : ''">
+          <input type="radio"
+                 id="fastService"
+                 formControlName='deliveryService'
+                 class="custom-control-input"
+                 value="quick">
+          <label class="custom-control-label"
+                 for="fastService">
+        <span class="service-label">
+          <span class="text">
+            Service Rapide
+          </span>
+          <span class="price">
+            {{calcDec(price.quickPrice.totalExVat)}}
+          </span>
+        </span>
+          </label>
+        </div>
+        <div *ngIf="price.expressPrice.totalExVat !== 0">
+          <div class="custom-control custom-radio custom-radio-btn custom-control-inline"
+               [ngClass]="selected_service === 'express' ? 'is-checked' : ''">
+            <input type="radio"
+                   id="expressService"
+                   formControlName='deliveryService'
+                   class="custom-control-input"
+                   value="express">
+            <label class="custom-control-label"
+                   for="expressService">
+        <span class="service-label">
+          <span class="text">
+            Service Express
+          </span>
+          <span class="price" >
+            {{calcDec(price.expressPrice.totalExVat)}}
+          </span>
+
+        </span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-5 expedition-date">
+        <div class="form-inline">
+          <div class="input-group expedition-datepicker">
+            <label class="expedition-label" for="pickingDate">Ramassage le</label>
+            <input class="form-control custom-form-control" placeholder="jj/mm/aaaa"
+                   id="pickingDate"
+                   formControlName="pickingDate"
+                   ngbDatepicker #d="ngbDatepicker"
+                   (click)="d.toggle()"
+                   [ngClass]="{'red-border': pickupDate.hasError('required') && step2form.submitted && pickupDate.invalid}">
+          </div>
+        </div>
+        <div class="help-block with-errors"
+             *ngIf="pickupDate.hasError('required') && step2form.submitted && pickupDate.invalid">
+          <span>
+          Choisissez une date du ramassage/dépot
+          </span>
+        </div>
+      </div>
+      <div class="col-md-7 expedition-time" *ngIf="(selected_service ==='express')">
+        <label for="pickingTime" class="sr-only"></label>
+        <select class="custom-select" id="pickingTime" formControlName="pickingTime">
+          <option value="" disabled selected>Choisir avant/après 11H</option>
+          <option value="before" [disabled]="before_11">Avant 11H</option>
+          <option value="after">Après 11H</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row packages-row">
+      <div class="select-rec col-md-12">
+        <div class=" text-content">
+          <h3>Services complémentaires</h3>
+        </div>
+
+      </div>
+      <div class="packages-table">
+
+        <table class="table custom-table">
+          <thead>
+          <tr>
+            <th scope="col">Vos colis</th>
+            <th scope="col">Emballage</th>
+            <th scope="col">Assurance</th>
+            <th scope="col">Recouvrement</th>
+            <th scope="col" *ngIf="nbr>0">Montant </th>
+            <th scope="col" *ngIf="nbr>0">Methode de recouvrement </th>
+
+
+          </tr>
+          </thead>
+          <tbody formArrayName="package_list_items"
+                 *ngFor="let item of step2_form.get('package_list_items')['controls']; let i = index">
+
+          <tr [formGroupName]="i">
+
+            <td scope="row" data-label="Vos Colis">Colis {{i+1}}: {{expedition.packages[i].designation}}</td>
+            <td data-label="Emballage">
+
+              <label for="packagingType-{{i}}" class="sr-only"></label>
+
+              <select class="custom-select custom-select-sm" id="packagingType-{{i}}" name="packagingType" formControlName="packagingType">
+                <option value="null" disabled selected>Type d'emballage</option>
+                <option value="null" >Pas d'emballage</option>
+                <optgroup *ngFor="let pack of packagingCategorie;let j = index" label="{{pack.type}}" >
+                  <option *ngFor="let packType of pack.packagingTypePrice; let k = index" value="{{packType.type}}" >{{packType.type}}</option>
+
+                </optgroup>
+                <!--                  <option value="null" disabled selected>Type emballage</option>-->
+                <!--                  <option value="null" >pas d'emballage</option>-->
+                <!--                  <option value="carton">Carton</option>-->
+                <!--                  <option value="plastique">Plastique</option>-->
+              </select>
+            </td>
+            <td data-label="Assurance">
+              <div class="input-group insurance-input">
+                <label class="sr-only" for="insurancePrice-{{i}}"></label>
+                <input type="number" class="form-control" id="insurancePrice-{{i}}" formControlName="insurancePrice" (change)="getInssurencePrice(i)" >
+                <div class="input-group-append">
+                  <span class="input-group-text">{{calcDec(package_list_items.at(i).get('insurance').value)}} DT</span>
+                </div>
+              </div>
+            </td>
+            <td data-label="Recouvrement">
+
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="PackageRecovery-{{i}}" formControlName="recoveryPrice" (change)="FieldsChange(i, $event)" >
+                <label class="custom-control-label" for="PackageRecovery-{{i}}">{{price.recoveryPrice}} DT</label>
+              </div>
+            </td>
+
+            <td data-label="Montant" >
+              <div class="input-group insurance-input  "   >
+
+
+                <input  id="PackageRecoveryInput-{{i}}"  type="number" class="form-control display-none "  formControlName="recMontant" >
+                <div class="input-group-append">
+                  <span  class="input-group-text display-none">{{(package_list_items.at(i).get('recMontant').value)}} DT</span>
+                </div>
+
+              </div>
+            </td>
+            <td data-lable="Methode de recouverement">
+              <div class="rec-conetnt" >
+                <select class="custom-select custom-select-sm display-none" formControlName="recoveryMethod">
+                  <option value="espéces" [defaultSelected]="true">espèces</option>
+                  <option value="chéque">chéque</option>
+                </select>
+              </div>
+
+            </td>
+
+
+
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      <div class="col-12 simulation-results">
+        <h3 class="black-title">
+          Total de l'expédition
+        </h3>
+        <div class="result-detail">
+          <div class="row">
+            <div class="col-sm-6">
+              <h5 class="promo-title">Avez vous un code promo?</h5>
+              <div class="form-inline discount-code mb-3">
+                <div class="input-group">
+                  <label for="discountInput" class="sr-only">code promo</label>
+                  <input type="text" id="discountInput"
+                         class="form-control custom-form-control"
+                         formControlName="discountInput"
+                         placeholder="Saisissez votre code"
+                         [ngClass]="{'red-border': discountAmount.hasError && discountAmount.invalid}">
+                  <button type="button" class="btn green-btn-sm ml-2 discount-btn" (click)="onDiscount()">OK</button>
+                </div>
+                <div class="help-block with-errors"
+                     *ngIf="discountAmount.hasError && discountAmount.invalid">
+                     <span>
+                       {{discountErrorMessage}}
+                      </span>
+                </div>
+                <div class="discount-value"
+                     *ngIf="discountCode.amount">
+                     <span>
+                       Ce code est de valeur {{discountCode.amount}} {{amountSymbol}}
+                      </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="result total-ht">
+                <p>Sous total h.t :</p>
+                <p>{{calcDec(priceSelected.totalExVat)}}</p>
+              </div>
+              <div class="result total-vat">
+                <p>TVA (7%) :</p>
+                <p>{{calcDec(priceSelected.vat)}}</p>
+              </div>
+              <div class="result total-ttc">
+                <p>Total t.t.c :</p>
+                <p>{{calcDec(priceSelected.totalIncVat)}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="billing-informations">
+      <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" (panelChange)="checkCollapse2($event)">
+        <ngb-panel>
+          <ng-template ngbPanelTitle>
+            <span *ngIf="collapsed2" class="mr-2 align-middle"><fa-icon [icon]="['fas', 'chevron-up']"></fa-icon></span>
+            <span *ngIf="!collapsed2" class="mr-2 align-middle"><fa-icon [icon]="['fas', 'chevron-down']"></fa-icon></span>
+            La livraison Express
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div class="package-shop">
+              <div class="img-container">
+                <img src="assets/img/box-rule.svg" alt="">
+              </div>
+              <div class="text">
+                <p>
+                  La livraison pour l'offre express avant 11H est facturé à 10% du montant brut de l'expédition. L'offre express n'est disponible
+                  que pour Sousse, Sfax et Tunis. Cette simulation aura lieu uniquement qu'en cas de validation finale ( validation du paiement ) si non,
+                  elle sera supprimée automatiquement.
+                </p>
+              </div>
+
+            </div>
+            <!--<div class="billing-rule">
+              <div class="rule-text">
+                <p>
+                  La livraison pour l'offre express avant 11H est facturé à 10% du montant brut de l'expédition. L'offre express n'est disponible
+                  que pour Sousse, Sfax et Tunis. Cette simulation aura lieu uniquement qu'en cas de validation finale ( validation du paiement ) si non,
+                  elle sera supprimée automatiquement.
+                </p>
+              </div>
+            </div>-->
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
+    <div class="button-controls">
+      <button type="button" class="btn black-btn" (click)="onBack()" awPreviousStep >Précédent</button>
+      <button type="submit" class="btn green-btn" [disabled]="submitted2">Suivant</button>
+    </div>
+  </form>
+</div>
+<!--{{price.price_economic}}-->
+<!--{{expedition.content}}-->
+<!--<ul>-->
+<!--  <li *ngFor="let package of expedition.packages">{{package.type}} {{package.height}} {{package.weight}}</li>-->
+<!--</ul>-->

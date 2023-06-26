@@ -1,0 +1,18 @@
+<div class="company-stats">
+    <div class="container">
+        <div class="company-title text-center">
+            <h3>
+                Nos performances
+            </h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 text-center" *ngFor="let stat of StatisticsContent">
+                <div class="stat-item">
+                    <img class="stat-icon" [src]="stat.icon" alt="">
+                    <h3 class="stat-title">{{stat.amount}}</h3>
+                    <p class="stat-text">{{stat.description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+<div class="contact-bloc">
+    <!--<p class="top-title">-->
+        <!--Contactez-nous-->
+    <!--</p>-->
+    <ng-content select=".top-title"></ng-content>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <ng-content select=".contact-title"></ng-content>
+                <ng-content select=".contact-description"></ng-content>
+            </div>
+            <div class="col-sm-12">
+                <form [formGroup]="form"
+                      (ngSubmit)="sendContact()">
+                    <div class="alert alert-danger"
+                    *ngIf="form.errors">
+                        Champs invalides
+                    </div>
+                    <div class="alert alert-danger"
+                         *ngIf="error_msg">
+                        {{ error_msg }}
+                    </div>
+                    <div class="alert alert-success"
+                         *ngIf="sucess_msg">
+                        {{ sucess_msg }}
+                    </div>
+                    <div class="controls contact-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input
+                                           formControlName="email"
+                                           id="form_email"
+                                           type="email"
+                                           class="form-control"
+                                           placeholder="Adresse e-mail *"
+                                           [ngClass]="{'red-border': email.invalid && (email.dirty || email.touched)}"
+                                    >
+                                    <div class="help-block with-errors"
+                                         *ngIf=" email.invalid && (email.dirty || email.touched)">
+                                        <span>
+                                            Entrez une adresse e-mail valide
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input
+                                           formControlName="subject"
+                                           id="form_subject"
+                                           type="text"
+                                           class="form-control"
+                                           placeholder="Sujet *"
+                                           [ngClass]="{'red-border': subject.invalid && (subject.dirty || subject.touched)}"
+                                          >
+                                    <div class="help-block with-errors"
+                                         *ngIf="subject.invalid && (subject.dirty || subject.touched)">
+                                        <span *ngIf="subject.errors.required">
+                                            Ce champ est obligatoire
+                                        </span>
+                                        <span *ngIf="subject.errors.minlength">
+                                            Minimum 3 caractères
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <textarea
+                                              formControlName="message"
+                                              id="form_message"
+                                              class="form-control"
+                                              placeholder="Message *"
+                                              rows="4"
+                                              [ngClass]="{'red-border': message.invalid && (message.dirty || message.touched)}"
+                                              >
+                                    </textarea>
+                                    <div class="help-block with-errors"
+                                         *ngIf="message.invalid && (message.dirty || message.touched)">
+                                        <span *ngIf="message.errors.required">
+                                            Ce champ est obligatoire
+                                        </span>
+                                        <span *ngIf="message.errors.minlength">
+                                            Minimum 10 caractères
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="col-md-12 mb-sm-3">-->
+                                <!--<ngx-recaptcha2 #captchaElem-->
+                                                <!--[siteKey]="captchaKey"-->
+                                                <!--(reset)="handleReset()"-->
+                                                <!--(expire)="handleExpire()"-->
+                                                <!--(load)="handleLoad()"-->
+                                                <!--(success)="handleSuccess($event)"-->
+                                                <!--[useGlobalDomain]="false"-->
+                                                <!--[size]="captchaSize"-->
+                                                <!--[hl]="lang"-->
+                                                <!--[theme]="theme"-->
+                                                <!--[type]="type"-->
+                                                <!--formControlName="recaptcha">-->
+                                <!--</ngx-recaptcha2>-->
+                            <!--</div>-->
+                            <div class="col-md-12 text-center">
+                                <div class="button-controls">
+                                    <button type="submit" class="btn green-btn-lg">envoyer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

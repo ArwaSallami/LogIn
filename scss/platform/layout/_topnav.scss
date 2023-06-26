@@ -1,0 +1,134 @@
+.cd-nav {
+  /* top nav - not visible on mobile devices */
+  display: none;
+
+  @include MQ(M) {
+    display: block;
+    float: right;
+    height: 100%;
+  }
+}
+
+.cd-top-nav {
+  @include media-breakpoint-down(sm) {
+    display: none;
+  }
+  .has-children {
+    ul {
+      border-bottom-right-radius: 6px;
+      border-bottom-left-radius: 6px;
+      li {
+        &:last-child {
+            border-bottom-right-radius: 6px;
+            border-bottom-left-radius: 6px;
+        }
+      }
+    }
+  }
+  .account {
+    position: relative;
+    .hello-user {
+      .fa-user-circle {
+        font-size: 26px;
+        margin-right: 4px;
+      }
+      &::after {
+        /* arrow icon */
+        position: absolute;
+        content: '';
+        height: 16px;
+        width: 16px;
+        right: 5%;
+        @include center(y);
+        background: url('assets/img/cd-w-arrow.svg') !important;
+      }
+    }
+    &.selected > a::after {
+      -webkit-transform: translateY(-50%) rotate(180deg);
+      -moz-transform: translateY(-50%) rotate(180deg);
+      -ms-transform: translateY(-50%) rotate(180deg);
+      -o-transform: translateY(-50%) rotate(180deg);
+      transform: translateY(-50%) rotate(180deg);
+    }
+  }
+  > li > a::before  {
+    /* reset style */
+    display: none;
+  }
+  > li a {
+    padding: 1em 5% !important;
+  }
+
+  img {
+    /* avatar image */
+    position: absolute;
+    left: 1.8em;
+    @include center(y);
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    display: none;
+  }
+
+  @include MQ(M) {
+    height: 100%;
+
+    a {
+      display: block;
+      font-size: 1.4rem;
+      color: $color-3;
+    }
+
+    > li {
+      display: inline-block;
+      margin-right: 1em;
+      height: 100%;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+
+    > li a {
+      padding: 1em .6em !important;
+    }
+
+    img {
+      display: block;
+    }
+  }
+
+  @include MQ(L) {
+    li:not(.has-children) a:hover {
+      color: $color-2;
+    }
+  }
+  li {
+    ul {
+      li {
+        background-color: #fff;
+        &:hover {
+          background-color: $content-bg-color;
+        }
+        a {
+          color: $dark-blue;
+          &:hover {
+            color: $green-custom !important;
+          }
+        }
+      }
+    }
+  }
+}
+.cd-top-nav {
+  .has-children.account {
+    a {
+      @include media-breakpoint-up(md) {
+        font-family: $Regular-font !important;
+      }
+      &::after {
+        background: none;
+      }
+    }
+  }
+}

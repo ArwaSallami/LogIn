@@ -1,0 +1,87 @@
+<section class="mini-topbar fixed-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="phone-bloc">
+                    <p class="phone-number">
+                        <span class="phone-icon"></span>
+                        <span>{{'Homepage.FirstNavbar.contactUs' | translate}}</span> {{'Homepage.FirstNavbar.phoneNumber' | translate}}
+                    </p>
+                </div>
+                <div class="connexion-bloc">
+                    <span *ngIf="!isLogin; else isLogIn" >
+                       <a class="login-link" routerLink="/login">
+                        <fa-icon icon="lock"></fa-icon>
+                        Connexion
+                    </a>
+                    <a class="sign-up-link" routerLink="/register">
+                        <fa-icon icon="user"></fa-icon>
+                        Créer un compte
+                    </a>
+                    </span>
+                     <!--<div ngbDropdown class="dropdown-wrapper language-dropdown" (openChange)="toggled2($event)">-->
+                            <!--<button class="btn custom-dropdown {{isOpen2}}" id="languageOptions" ngbDropdownToggle>-->
+                                <!--{{defaultLanguage}}-->
+                            <!--</button>-->
+                            <!--<div ngbDropdownMenu aria-labelledby="languageOptions" class="languages">-->
+                                <!--<button ngbDropdownItem (click)="switchLanguage('en')">en</button>-->
+                                <!--<button ngbDropdownItem (click)="switchLanguage('fr')">fr</button>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <ng-template #isLogIn>
+                        <div ngbDropdown class="dropdown-wrapper d-inline-block" (openChange)="toggled($event)">
+                            <button class="btn custom-dropdown {{isOpen}}" id="loginOptions" ngbDropdownToggle>
+                                Bonjour {{user.lastName}}
+                            </button>
+                            <div ngbDropdownMenu aria-labelledby="loginOptions">
+
+                                <a ngbDropdownItem class="login-link" routerLink="/dashboard/settings">
+                                    <fa-icon icon="user"></fa-icon>
+                                    Mon Profil
+                                </a>
+                                <a ngbDropdownItem class="sign-up-link" routerLink="/logout" (click)="onLogout()">
+                                    <fa-icon [icon]="['fas', 'sign-out-alt']"></fa-icon>
+                                    Logout
+                                </a>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<nav class="navbar navbar-expand-md navbar-light main-topbar fixed-top">
+<div class="container">
+    <a class="navbar-brand" routerLink="/">
+        <img class="logo-img" src="{{logo}}" alt="logo LOG'IN">
+    </a>
+    <button class="navbar-toggler" type="button"
+            data-toggle="collapse" data-target="#topNavBar"
+            aria-controls="topNavBar"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse navbar-links" id="topNavBar">
+        <ul class="navbar-nav ml-auto">
+            <li routerLinkActive="active" class="nav-item" (click)="hideNav()">
+                <a class="nav-link" routerLink="/commande">Commande</a>
+            </li>
+            <li routerLinkActive="active" class="nav-item" (click)="hideNav()">
+                <a class="nav-link" routerLink="/suivicolis">Suivi Colis</a>
+            </li>
+            <li routerLinkActive="active" class="nav-item" (click)="hideNav()">
+                <a class="nav-link" routerLink="/offers">Nos solutions informatiques</a>
+            </li>
+            <li routerLinkActive="active" class="nav-item" (click)="hideNav()">
+                <a class="nav-link" routerLink="/support">Aide & Support</a>
+              </li>
+            <li routerLinkActive="active" class="nav-item" (click)="hideNav()">
+              <a class="nav-link" routerLink="/faq">Faq</a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+</nav>

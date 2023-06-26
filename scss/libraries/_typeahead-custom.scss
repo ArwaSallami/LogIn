@@ -1,0 +1,10 @@
+ngb-typeahead-window.dropdown-menu.show {
+  border-radius: 0;
+  width: 100%;
+  .dropdown-item {
+    &.active {
+      background-color: $green-1;
+      border-radius: 0;
+    }
+  }
+}

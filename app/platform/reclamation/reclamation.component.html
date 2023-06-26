@@ -1,0 +1,110 @@
+<div class="page-title">
+  <h3>
+    Historique des réclamations
+  </h3>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="main-bloc">
+      <div class="box">
+        <div class="row">
+          <div class="col-sm-6">
+            <div [formGroup]="listForm">
+              <select formControlName="list" (change)="changeListNumber()"
+                      class="custom-select-sm sort-select">
+                <option value="5" selected>Afficher par 5</option>
+                <option value="10">Afficher par 10</option>
+                <option value="15">Afficher par 15</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="search-container">
+              <div class="search-input input-group mb-3">
+                <input type="text" class="form-control" placeholder="Recherche ..." aria-label="Search" [(ngModel)]="reclamationFilter.reference"
+                       aria-describedby="basic-addon1" >
+              </div>
+            </div>
+          </div>
+          <div class="table-container table-responsive">
+            <table class="table table-striped general-table campaign-table">
+              <thead>
+              <tr>
+                <th scope="col" (click)="sort('reference')">Référence
+                  <span class="glyphicon sort-icon" *ngIf="key ==='reference'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+
+                </th>
+                <th scope="col" (click)="sort('createdAt')">Date de création
+                  <span class="glyphicon sort-icon" *ngIf="key ==='createdAt '" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+
+                </th>
+                <th scope="col">état</th>
+                <th scope="col">Action</th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <ng-container *ngFor="let reclamation of reclamations | orderBy: key : reverse |filterBy: reclamationFilter | paginate: { itemsPerPage: nbrPerPage ,currentPage: changeListNumber } ; let i = index">
+                <tr>
+
+                  <td> {{reclamation.reference}}</td>
+                  <td> {{reclamation.createdAt | date : 'd' }} /{{reclamation.createdAt | date : 'M' }} /{{reclamation.createdAt | date : 'y' }} </td>
+                  <td>
+                    <span class="success">En progression </span>
+                  </td>
+                  <td class="text-center arrow-container">
+                     <span data-toggle="collapse"
+                           [attr.data-target]="'#advaccordion_'+ i"
+                           aria-expanded="false"
+                           class="info-collapse">
+                             Détail
+                     </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4" class="mobile-td-table">
+                    <div id="advaccordion_{{i}}" class="collapse" style="">
+                      <div class="td-content text-left">
+                        <div>
+                          <b>Type de reclamation:  </b>
+                          {{reclamation.type}}
+                        </div>
+                        <div>
+                          <b>Expedition :</b>
+                          {{reclamation.expedition.publicCode}}
+                        </div>
+                        <div>
+                          <b>Type Colis:  </b>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+              </ng-container>
+              <ng-template [ngIf]="(reclamations | filterBy: reclamationFilter).length === 0 ">
+                <tr>
+                  <td colspan="4" class="no-results">
+                    Aucune reclamation trouvée
+                  </td>
+                </tr>
+              </ng-template>
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination-container" *ngIf="reclamations.length>0">
+            <div class="col-lg-12 d-flex">
+              <ul class="pagination mx-auto">
+                <pagination-controls
+                  previousLabel=""
+                  nextLabel=""
+                  (pageChange)="p = $event"></pagination-controls>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

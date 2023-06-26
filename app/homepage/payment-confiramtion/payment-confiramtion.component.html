@@ -1,0 +1,27 @@
+
+<div class="payment-confiramtion-page">
+  <div class="payment-header">
+    <h2>
+      Payment
+    </h2>
+    <p>
+      {{message}}
+    </p>
+  </div>
+  <div>
+    <div class="container" *ngIf="expedition && !successPayment">
+      <aw-wizard #wizard [disableNavigationBar]="true">
+        <aw-wizard-step [stepTitle]="steptitle5" (stepEnter)="getstepTitle($event)">
+          <app-step-five [expedition]="expedition"></app-step-five>
+        </aw-wizard-step>
+        <aw-wizard-step [stepTitle]="steptitle6" (stepEnter)="getstepTitle($event)">
+          <app-step-six [expedition]="expedition" [price]="price"></app-step-six>
+        </aw-wizard-step>
+      </aw-wizard>
+
+    </div>
+  <div clas="container" *ngIf="expedition && successPayment === true ">
+    <app-step-six [expedition]="expedition" [price]="price"></app-step-six>
+      </div>
+  </div>
+</div>

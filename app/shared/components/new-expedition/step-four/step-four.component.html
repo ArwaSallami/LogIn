@@ -1,0 +1,224 @@
+<div class="confirmation-step">
+
+  <div class="row">
+    <div class="col-12">
+      <h3 class="expedition-reference">
+        Référence de l'expédition:
+        <span>{{expedition.publicCode}}</span>
+      </h3>
+    </div>
+    <div class="col-md-5">
+      <div class="picking-type">
+        <h3 class="green-title">
+          Ramassage
+        </h3>
+        <p>
+          Date de ramassage: {{expedition.pickUpDate | date:'d'}}/{{expedition.pickUpDate | date:'M'}}/{{expedition.pickUpDate | date:'y'}} - <span *ngIf="expedition.pickingTime ==='after'; else after ">Après 11 H</span><ng-template #after>Avant 11 H</ng-template>
+        </p>
+        <p>
+          Lieu de ramassage: {{expedition.depCity}} {{expedition.depZipCode}}
+        </p>
+        <p *ngIf="expedition.pickUpMethod=='drop'">
+          Adresse de point relai: {{expedition.depPointRelai.address}}
+        </p>
+      </div>
+      <div class="departure-address">
+        <h3 class="green-title">
+          Adresse d'expediteur
+        </h3>
+        <p>
+          Adresse: {{depAdress.address}}
+        </p>
+        <p>Complément d'adresse : {{depAdress.complementOfAddress}} </p>
+        <p>
+          {{depAdress.municipality}} {{depAdress.zipCode}}
+        </p>
+        <p>Contact: {{depAdress.firstName}} {{depAdress.lastName}}</p>
+        <p>Téléphone: {{depAdress.phoneNumber}}</p>
+        <p>E-mail: {{depAdress.email}}</p>
+      </div>
+    </div>
+    <div class="col-md-5 offset-md-1">
+      <div class="delivery-type">
+        <h3 class="green-title">
+          Livraison
+        </h3>
+        <p>
+          Date de livraison:
+          <span *ngIf="expedition.deliveryService === 'express';">1 jour au plus tard</span>
+          <span *ngIf="expedition.deliveryService === 'quick';">2 jours au plus tard</span>
+          <span *ngIf="expedition.deliveryService === 'economic';">3 jours au plus tard</span>
+          <span>*</span>
+        </p>
+        <p>
+          Lieu de livraison: {{expedition.desCity}} {{expedition.desZipCode}}
+        </p>
+        <p *ngIf="expedition.deliveryMethod=='drop'">
+          Adresse de point relai: {{expedition.desPointRelai.address}}
+        </p>
+      </div>
+      <div class="destination-address">
+        <h3 class="green-title">
+          Adresse de destinataire
+        </h3>
+        <p>
+          Adresse : {{desAdress.address}}
+        </p>
+        <p>Complément d'adresse : {{desAdress.complementOfAddress}}</p>
+        <p>
+          {{desAdress.municipality}} {{desAdress.zipCode}}
+        </p>
+        <p>Contact: {{desAdress.firstName}} {{desAdress.lastName}}</p>
+        <p>Téléphone: {{desAdress.phoneNumber}}</p>
+        <p>E-mail: {{desAdress.email}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="package-description">
+        <h3 class="green-title">
+          Description
+        </h3>
+        <p>Nature de l'envoi: {{expedition.packageType}}</p>
+      </div>
+      <div class="billing-block">
+        <table class="table custom-table delivery-service">
+          <thead>
+          <tr>
+            <th scope="col"><h3 class="green-title">Service de livraison</h3></th>
+            <th scope="col"><h3>Tarif H.T</h3></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td scope="row" data-label="Service de livraison">
+              <span class="service-type" *ngIf="expedition.deliveryService === 'express';">Express</span>
+              <span class="service-type" *ngIf="expedition.deliveryService === 'quick';">Rapide</span>
+              <span class="service-type" *ngIf="expedition.deliveryService === 'economic';">Économique</span>
+            </td>
+            <td scope="row" data-label="Tarif H.T">
+              <span class="price" *ngIf="expedition.deliveryService==='economic'">{{calcDec(price.economicPrice.totalExVat)}}</span>
+              <span class="price" *ngIf="expedition.deliveryService==='quick'">{{calcDec(price.quickPrice.totalExVat)}}</span>
+              <span class="price" *ngIf="expedition.deliveryService==='express'">{{calcDec(price.expressPrice.totalExVat)}}</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <table class="table custom-table additional-services">
+          <thead>
+          <tr>
+            <th scope="col"><h3 class="green-title">Services Complémentaires</h3></th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let package of packages; let i = index">
+            <td scope="row" data-label="Services Complémentaires">
+              <ul class="list-inline package-item">
+                <li class="list-inline-item">
+                <p *ngIf="package.type==='document'">Document {{i + 1}}</p>
+                <p *ngIf="package.type==='colis'">Colis {{i + 1}}: {{package.designation}}</p>
+              </li>
+                <li class="list-inline-item">
+                  <span class="description">Type d'embalage</span>
+                  <p class="package-name">{{package.packagingType}}</p>
+                </li>
+                <li class="list-inline-item">
+                  <span class="description">Prix d'embalage</span>
+                  <p>{{package.packagingPrice}}DT</p>
+                </li>
+                <li class="list-inline-item">
+                  <span class="description">Poids déclaré</span>
+                  <p>{{package.weight}}KG</p>
+                </li>
+                <li class="list-inline-item">
+                  <span class="description">Assurance</span>
+                  <p>{{calcDec(package.insurance)}}DT</p>
+                </li>
+                <li class="list-inline-item">
+                  <span class="description">Recouvrement</span>
+                  <p>{{package.recoveryPrice}}DT</p>
+                </li>
+                <li class="list-inline-item" *ngIf="package.recMontant > 0">
+                  <span class="description">Recouvrement par coli</span>
+                  <p>{{calcDec(package.recMontant)}}DT</p>
+                </li>
+                <li class="list-inline-item" *ngIf="package.recMontant > 0">
+                  <span class="description">Method de payment</span>
+                  <p>{{package.recoveryMethod}}</p>
+                </li>
+
+              </ul>
+            </td>
+            <td scope="row" data-label="Tarif H.T"><span class="price">{{calcDec(package.insurance + package.recoveryPrice + package.packagingPrice)}} DT</span></td>
+          </tr>
+          </tbody>
+        </table>
+        <table class="table custom-table total-expedition">
+          <thead>
+          <tr>
+            <th scope="col"><h3 class="green-title">Votre expédition</h3></th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td scope="row" data-label="Votre expédition">
+              <div class="list-unstyled expedition-price" *ngIf="expedition.discountCodes">
+                <div class="display-mode total-ht">
+                  <h3>Type :</h3>
+                  <p>{{ expedition.discountCodes.type }} </p>
+                </div>
+                <div class="display-mode vat-value">
+                  <h3>Montant :</h3>
+                  <p>{{calcDec(expedition.discountCodes.amount)}} </p>
+                </div>
+                <div class="display-mode vat-value">
+                  <h3 placement="top" ngbTooltip="Avant la réduction">HT (Original):</h3>
+                  <p>{{calcDec(expedition.originalPrice(expedition.totalExVat))}}
+                </div>
+                <div class="display-mode vat-value">
+                  <h3 placement="top" ngbTooltip="Avant la réduction">TTC (Original):</h3>
+                  <p>{{calcDec(expedition.originalPrice(expedition.totalIncVat))}}
+                </div>
+
+
+              </div>
+
+            </td>
+            <td scope="row">
+              <div class="list-unstyled expedition-price">
+                  <div class="display-mode total-ht" *ngIf="expedition.recouvermentPrix > 0">
+                    <h3>Total montant de recouvrement :</h3>
+                    <p>{{calcDec(expedition.recouvermentPrix)}} DT</p>
+                  </div>
+                <div class="display-mode total-ht" *ngIf="expedition.recouvermentPrix > 0">
+                  <h3>Method de payment de recouveremnt  par : </h3>
+                  <p>{{expedition.recPaymentMethod}} </p>
+                </div>
+                <div class="display-mode total-ht">
+                  <h3>Total H.T. :</h3>
+                  <p>{{calcDec(expedition.totalExVat)}} DT</p>
+                </div>
+                  <div class="display-mode vat-value">
+                    <h3>TVA (7%) :</h3>
+                    <p>{{calcDec(expedition.vat)}} DT</p>
+                  </div>
+                  <div class="display-mode total-ttc">
+                    <h3>Total T.T.c. :</h3>
+                    <p>{{calcDec(expedition.totalIncVat)}} DT</p>
+                  </div>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="button-controls">
+    <button type="button" class="btn black-btn" (click)="onBack()" awPreviousStep>Précédent</button>
+    <button type="submit" class="btn green-btn" (click)="goTop()" awNextStep>Suivant</button>
+  </div>
+</div>

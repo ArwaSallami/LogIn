@@ -1,0 +1,581 @@
+.cd-side-nav {
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  padding: $header-height-S 0 0;
+  background-color: #fff;
+  visibility: hidden;
+  opacity: 0;
+  max-height: 100vh;
+  overflow: hidden;
+  @include font-smoothing;
+  -webkit-transition: opacity 0.2s 0s, visibility 0s 0.2s;
+  -moz-transition: opacity 0.2s 0s, visibility 0s 0.2s;
+  transition: opacity 0.2s 0s, visibility 0s 0.2s;
+  .nav-content {
+    .logout {
+      display: block;
+    }
+    .account {
+      display: block;
+    }
+    @include media-breakpoint-up(md) {
+      .logout {
+        display: none;
+      }
+      //.account {
+      //  display: none;
+      //}
+    }
+  }
+
+  &.nav-is-visible {
+    opacity: 1;
+    visibility: visible;
+    overflow: visible;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transition: opacity 0.2s 0s, visibility 0s 0s;
+    -moz-transition: opacity 0.2s 0s, visibility 0s 0s;
+    transition: opacity 0.2s 0s, visibility 0s 0s;
+    max-height: none;
+    box-shadow: 0 2px 10px rgba(#000, .2);
+  }
+
+  > ul {
+    padding: 0.6em 0;
+
+    &:last-of-type {
+      padding-bottom: 78px;
+    }
+  }
+
+  .cd-label, a {
+    display: block;
+    padding: 1em 5%;
+  }
+
+  .cd-label {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $subtitle-color;
+    font-size: .7rem;
+    letter-spacing: .1em;
+  }
+
+  a {
+    position: relative;
+    color: $dark-blue;
+    font-size: 1.4rem;
+  }
+
+  ul.cd-top-nav > li:last-of-type > a {
+    border-bottom: none;
+  }
+
+  > ul > li > a {
+    padding-left: calc(5% + 30px);
+    border-bottom: 1px solid $content-bg-color;
+
+    &::before {
+      /* icon before item name */
+      position: absolute;
+      content: '';
+      left: 4%;
+      @include center(y);
+      height: 26px;
+      width: 26px;
+    }
+  }
+
+  > ul > li.overview > a::before {
+    background: url('assets/img/history-icon.svg') no-repeat;
+    background-position: 0 0;
+  }
+  > ul > li.account > a::before {
+    background: url('assets/img/user-icon.svg') no-repeat;
+    background-position: 0 0;
+  }
+  > ul > li.contacts > a::before {
+    background: url('assets/img/new-command-icon.svg') no-repeat;
+    background-position: 0 0;
+  }
+  > ul > li.campaigns > a::before {
+    background: url('assets/img/follow-command-icon.svg') no-repeat;
+    background-position: 0 0;
+  }
+  > ul > li.reclamation > a::before {
+    background: url('assets/img/headset-icon.svg') no-repeat;
+    background-position: 0 0;
+  }
+  ul > li.stats > a::before {
+    background: url('assets/img/statistique.svg') no-repeat;
+    background-position: 0 0;
+  }
+  > ul > li.logout > a::before {
+    background: url('assets/img/logout-icon.svg') no-repeat;
+    background-position: 0 0;
+  }
+  .count {
+    /* notification badge */
+    position: absolute;
+    @include center(y);
+    right: calc(5% + 16px + 0.4em);
+
+    padding: 0.2em 0.4em;
+    background-color: $color-4;
+    border-radius: .25em;
+
+    color: $color-3;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .action-btn a {
+    display: block;
+    margin: 0 5%;
+    padding: 1em 0;
+    background-color: $color-2;
+    border-radius: .25em;
+    border: none;
+    box-shadow: 0 1px 3px rgba(#000, .3), inset 0 1px 0 rgba(#fff, .2);
+
+    text-align: center;
+    color: $color-3;
+    font-weight: bold;
+
+    &::before {
+      display: none;
+    }
+  }
+  .active > a {
+  color: $purple;
+  }
+  @include MQ(M) {
+    position: fixed;
+    float: left;
+    top: auto;
+    width: $sidebar-width-M;
+    min-height: 100vh;
+    padding-top: $header-height-M;
+    /* reset style */
+    visibility: visible;
+    opacity: 1;
+    overflow: visible;
+    max-height: none;
+
+    &.nav-is-visible {
+      box-shadow: none;
+    }
+
+    &.is-fixed {
+      position: fixed;
+    }
+
+    > ul {
+      /* reset style */
+      padding: 0;
+    }
+
+    .cd-label {
+      /* remove labels on minified version of the sidebar */
+      display: none;
+    }
+
+    a {
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    > ul > li > a {
+      padding: calc(2.2em + 24px) 0 2.4em;
+
+      &::before {
+        @include center(x);
+        top: 2.0em;
+      }
+    }
+
+    .active > a {
+      /* current page */
+      //box-shadow: inset 3px 0 0 $color-2;
+      background-color: $content-bg-color;
+      color: $green-custom;
+    }
+
+    .action-btn a {
+      margin: 1em 10% 0;
+    }
+
+    .count {
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(#000, .2);
+      padding: 0;
+      top: 2em;
+      -webkit-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      -o-transform: translateX(-50%);
+      transform: translateX(-50%);
+      left: calc(50% + 5px);
+      right: auto;
+      color: transparent;
+      @include media-breakpoint-only(md) {
+        margin-left: 10px;
+        top: 16px;
+      }
+    }
+  }
+
+  @include MQ(L) {
+    width: $sidebar-width-L;
+
+    > ul {
+      padding: 0.6em 0;
+    }
+
+    > ul > li:not(.action-btn):hover > a {
+      background-color: $content-bg-color;
+      color: $green-custom;
+    }
+
+    > ul > li > a {
+      padding: 1em 1em 1em 65px;
+      text-align: left;
+      border-bottom: none;
+      transition: all 0.5s ease;
+      cursor: pointer;
+
+      &::before {
+        @include center(y);
+        left: 22px;
+      }
+    }
+
+    .cd-label {
+      display: block;
+      padding: 1em 18px;
+    }
+
+    .action-btn {
+      text-align: left;
+
+      a {
+        margin: 0 18px;
+
+        .no-touch &:hover {
+          background-color: lighten($color-2, 5%);
+        }
+      }
+    }
+
+    .count {
+      /* reset style */
+      color: $color-3;
+      height: auto;
+      width: auto;
+      border-radius: .25em;
+      padding: .2em .4em;
+      @include center(y);
+      right: 18px;
+      left: auto;
+      box-shadow: none;
+      font-size: 14px;
+    }
+  }
+}
+.has-children.hover {
+  ul {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    li {
+      &:first-child, &:last-child {
+        &:hover {
+          border-top-right-radius: 6px;
+          border-bottom-right-radius: 6px;
+        }
+      }
+    }
+  }
+}
+.has-children {
+  ul {
+    position: relative;
+    width: 100%;
+    display: none;
+    background-color: #fff;
+  }
+  a {
+    .arrow-icn {
+      display: inline-block;
+      @include transition(.25s);
+      .ng-fa-icon {
+        margin-left: 2px;
+        margin-right: 2px;
+        vertical-align: text-bottom;
+      }
+      &.rotate {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+      }
+    }
+
+  }
+  > a::after {
+    /* arrow icon */
+    position: absolute;
+    content: '';
+    height: 16px;
+    width: 16px;
+    right: 5%;
+    @include center(y);
+    background: url('/assets/img/cd-arrow.svg');
+  }
+
+  &.selected > ul {
+    display: block;
+  }
+
+  &.selected > a::after {
+    -webkit-transform: translateY(-50%) rotate(180deg);
+    -moz-transform: translateY(-50%) rotate(180deg);
+    -ms-transform: translateY(-50%) rotate(180deg);
+    -o-transform: translateY(-50%) rotate(180deg);
+    transform: translateY(-50%) rotate(180deg);
+  }
+
+  @include MQ(M) {
+    position: relative;
+
+    ul {
+      //position: absolute;
+      //top: 0;
+      //left: 100%;
+      width: 160px;
+      padding: 0;
+      @include box-shadow($purple-boxshadow);
+    }
+
+    ul a {
+      text-align: left;
+      border: none;
+      padding: 1em;
+      .no-touch &:hover {
+        color: $purple;
+      }
+    }
+
+    > a::after {
+      display: none;
+    }
+
+    .cd-side-nav & {
+      &.selected > a {
+        /* focus state -> show sub pages */
+        background-color: darken($content-bg-color, 5%);
+      }
+    }
+    .cd-side-nav {
+      font-family: $Regular-font;
+      a {
+        &:hover {
+          color: $dark-purple !important;
+        }
+      }
+    }
+
+    .cd-top-nav & {
+      position: relative;
+      background-color: transparent;
+
+      > a {
+        height: 100%;
+        padding: 0 calc(1.8em + 22px) 0 calc(1.8em + 26px) !important;
+        line-height: $header-height-M;
+        color: #fff;
+
+        &::after {
+          display: block;
+          right: 1.8em;
+        }
+      }
+
+      ul {
+        background-color: darken($content-bg-color, 5%);
+        width: 200px;
+        top: 100%;
+        right: 0;
+        left: auto;
+        box-shadow: 0 1px 10px rgba(#000, .2);
+      }
+
+      ul a {
+        padding-left: 18px !important;
+      }
+    }
+  }
+
+  @include MQ(L) {
+    ul {
+      li {
+        a {
+          padding-left: 65px;
+          cursor: pointer;
+          @include transition(.25s);
+          position: relative;
+          &.active {
+            //background-color: $content-bg-color;
+            color: $green-custom;
+          }
+          &:hover {
+            background-color: $content-bg-color;
+            color: $green-custom;
+          }
+          &:before {
+            content: '';
+            position: absolute;
+            left: 34px;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: rgba(84, 190, 115, 0.44);
+          }
+        }
+        &:first-child {
+          a {
+            &:before {
+              border-top-left-radius: 50px;
+              border-top-right-radius: 50px;
+            }
+          }
+        }
+        &:last-child {
+          a {
+            &:before {
+              border-bottom-left-radius: 50px;
+              border-bottom-right-radius: 50px;
+            }
+          }
+        }
+      }
+    }
+    > ul {
+      display: block;
+      width: 100%;
+      z-index: -1;
+      height: 0;
+      opacity: 0;
+      @include transition(.25s);
+    }
+    &.active > ul {
+      z-index: 1;
+      height: auto;
+      opacity: 1;
+    }
+
+    .no-touch .cd-side-nav &:hover > ul,
+    .cd-side-nav &.hover > ul {
+      /* show subnavigation on hover */
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      transition: all 0.5s ease;
+    }
+  }
+}
+.rotate {
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+.campaigns {
+  .inprogress {
+    position: relative;
+    .count {
+      @media (max-width: 1170px) and (min-width: 768px){
+        position: absolute;
+        top: 15px;
+        left: 95px;
+      }
+    }
+  }
+}
+.account {
+  .user-icon {
+    height: 22px;
+    width: 22px;
+    display: inline-block;
+    background-image: url('assets/img/user-icon.svg');
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    @include media-breakpoint-down(sm) {
+      height: 26px;
+      width: 26px;
+      margin-left: -6px;
+      margin-right: 10px;
+    }
+  }
+}
+@include media-breakpoint-down(sm) {
+  .cd-side-nav {
+    display: none;
+    transition: all ease 0.5s
+  }
+  .cd-side-nav.nav-is-visible {
+    position: sticky;
+    display: block;
+    .nav-content {
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      .cd-label {
+        display: none;
+      }
+    }
+  }
+}
+@include media-breakpoint-between(md, xl) {
+  .cd-side-nav {
+    .nav-content {
+      .has-children.support {
+        transition: all ease .5s;
+      }
+      .has-children.support.selected {
+        margin-bottom: 50px;
+      }
+    }
+  }
+}
+/*MAJOR PLATFORM LEFT SIDEBAR + CONTENT DISPLAY: This block is made to fix the syncho scroll
+for the left and the content bar in case there are too many links in the left sidebar to not be hidden
+and to display the bar with the same height
+*/
+/*========================================= Fix Block start =========================================*/
+@media (min-width: 1170px) {
+  .nav-content {
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
+@media (min-width: 768px) and (max-width: 1170px) {
+  .content-wrapper {
+    height: 100vh;
+    overflow-y: scroll;
+    width: 100%;
+    //margin-left: 0 !important;
+  }
+  .cd-main-content {
+    display: flex;
+    flex-direction: row;
+  }
+  .cd-side-nav {
+    height: 100vh;
+    overflow-y: scroll;
+    width: 135px;
+  }
+}
+/*========================================= Fix Block end =========================================*/

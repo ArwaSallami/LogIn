@@ -1,0 +1,37 @@
+<div class="command-container">
+    <h3 class="page-title">lancer une commande :</h3>
+    <div class="current-step-title">
+      <p class="current-index">étape{{current_index}} :</p>
+      <p class="current-step">{{current_step_title}}</p>
+    </div>
+
+    <aw-wizard #wizard [disableNavigationBar]="true">
+      <!-- Description Step -->
+      <aw-wizard-step [stepTitle]="steptitle1" (stepEnter)="getstepTitle($event)"(stepExit)="start()">
+        <app-step-one></app-step-one>
+      </aw-wizard-step>
+      <!-- prices Step -->
+      <aw-wizard-step [stepTitle]="steptitle2" (stepEnter)="getstepTitle($event)">
+        <app-step-two [price]="price" [expedition]="expedition"></app-step-two>
+      </aw-wizard-step>
+      <!-- information Step -->
+      <aw-wizard-step [stepTitle]="steptitle3" (stepEnter)="getstepTitle($event)" (stepExit)="start2()">
+        <app-step-three [expedition]="expedition"></app-step-three>
+      </aw-wizard-step>
+      <!-- confirmation Step -->
+      <aw-wizard-step [stepTitle]="steptitle4" (stepEnter)="getstepTitle($event)">
+        <app-step-four [expedition]="expeditionS2" [price]="priceS2"></app-step-four>
+      </aw-wizard-step>
+      <!-- payment Step -->
+      <aw-wizard-step [stepTitle]="steptitle5" (stepEnter)="getstepTitle($event)">
+        <app-step-five [expedition]="expeditionS2"></app-step-five>
+      </aw-wizard-step>
+      <aw-wizard-step [stepTitle]="steptitle6" (stepEnter)="getstepTitle($event)">
+        <app-step-six [expedition]="expeditionS2" [price]="priceS2"></app-step-six>
+      </aw-wizard-step>
+    </aw-wizard>
+  </div>
+
+<ng4-loading-spinner></ng4-loading-spinner>
+
+

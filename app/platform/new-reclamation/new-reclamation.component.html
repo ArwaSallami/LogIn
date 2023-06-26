@@ -1,0 +1,86 @@
+<div class="page-title">
+  <h3>
+    Ajouter une reclamation
+  </h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="main-bloc">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="box">
+            <p class="box-header">Reclamation
+              <i class="bar-icon"></i>
+            </p>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="alert alert-danger"
+                         *ngIf="errorMsg">
+                      {{ errorMsg }}
+                    </div>
+                    <div class="alert alert-success"
+                         *ngIf="successMsg">
+                      {{ successMsg }}
+                    </div>
+                    <label >
+                      Choisir Expedition *</label>
+                    <select class="form-control" formControlName="publicCode">
+                      <option value="null" disabled selected>Choisir expedition</option>
+                      <option *ngFor="let expedition of expeditions" value="{{expedition.publicCode}}">{{expedition.publicCode}}</option>
+                    </select>
+                    <div class="help-block with-errors" *ngIf="publicCode.invalid && (publicCode.dirty || publicCode.touched)">
+                      <span>Ce champs est obligatoire!</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label >
+                      Motif de réclamation *</label>
+                    <select class="form-control" formControlName="type">
+                      <option value="null" disabled selected>Choisir le type de réclamation...</option>
+                      <option>Colis en retard</option>
+                      <option>Colis perdu</option>
+                    </select>
+                    <div class="help-block with-errors" *ngIf="type.invalid && (type.dirty || type.touched)">
+                      <span>Ce champs est obligatoire!</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label >
+                      Message *</label>
+                    <textarea class="form-control" formControlName="message"></textarea>
+                    <div class="help-block with-errors" *ngIf="message.invalid && (message.dirty || message.touched)">
+                      <span>Ce champs est obligatoire!</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="button-controls text-right mt-4">
+                <button type="submit" class="btn green-rounded-btn" [disabled]="!isSublitting&&!form.valid">
+                  <span>
+
+                  </span>
+                  Envoyer
+                </button>
+              </div>
+<!--              <div class="alert alert-danger">-->
+<!--                Error-->
+<!--              </div>-->
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

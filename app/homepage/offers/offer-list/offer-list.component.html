@@ -1,0 +1,80 @@
+<div class="offers-header">
+  <h2>
+    NOS SOLUTIONS INFORMATIQUES
+  </h2>
+  <p>
+    Accueil / Nos Solutions informatiques
+  </p>
+</div>
+<div class="offers-detail-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="offers-list-container">
+          <div class="list-title">
+            <h5>
+              Liste de nos offres
+              <i class="bar-icon"></i>
+            </h5>
+          </div>
+          <ul class="list-unstyled offers-links">
+            <li *ngFor="let offer of offers">
+              <a [routerLink]="['/offers', offer.offerId]" routerLinkActive="active">
+                {{ offer.offerName }}
+              </a>
+            </li>
+          </ul>
+            <div id="accordion" class="offers-accordion" >
+                <div class="offer-item" *ngFor="let offer of offers">
+                    <div class="offer-header"
+                         [attr.id]="'heading_' + offer.offerId">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    [attr.data-target]="'#collapse_' + offer.offerId"
+                                    [attr.aria-controls]="'#collapse_' + offer.offerId"
+                                    aria-expanded="true">
+                                {{offer.offerName}}
+                                <fa-icon [icon]="['fas', 'angle-down']"></fa-icon>
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div [attr.id]="'collapse_' + offer.offerId"
+                         [className]="offer.offerId == offer_id ? 'collapse show' : 'collapse'"
+                         [attr.aria-labelledby]="'#heading_' + offer.offerId"
+                         data-parent="#accordion">
+                        <div class="offer-body">
+                            <div class="image-container">
+                                <img src="{{offer.imageUrl}}" alt="">
+                                <div class="image-title">
+                                    <h3>
+                                        {{offer.offerName}}
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="offer-content">
+                                <p class="offer-text" [innerHTML]="offer.text">
+                                </p>
+                                <ul class="list-unstyled box-list">
+                                    <li  *ngFor=" let doffer of offer.emballage">
+                                        <p [innerHTML]="doffer.emballageText"></p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <app-offer-detail></app-offer-detail>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

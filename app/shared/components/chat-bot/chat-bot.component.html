@@ -1,0 +1,47 @@
+
+<div class="chat-widget" [ngClass]="status ? 'is-visible' : 'is-hidden'">
+  <div class="chat">
+    <div class="chat-title">
+      <h1>Service Client</h1>
+      <h1>LOG’IN</h1>
+      <figure class="avatar">
+        <img src="assets/img/client-service.jpg" /></figure>
+    </div>
+    <div class="messages">
+      <div class="messages-content">
+        <div class="message"
+             *ngFor="let message of messages | async"
+             [ngClass]="{'new': message.sentBy === 'bot',
+                                    'message-personal new':   message.sentBy === 'user' }">
+
+          <figure class="avatar" *ngIf="message.sentBy === 'bot'">
+            <img src="assets/img/client-service.jpg">
+          </figure>
+          <div *ngIf="message.content==''">
+            J'ai du mal à comprendre cette question. mais vous pouvez envoyer votre question sur
+            <a class="support-link" routerLink="/support">la page support</a> </div>
+          {{ message.content }}
+        </div>
+      </div>
+    </div>
+    <div class="message-box">
+    <textarea [(ngModel)]="formValue"
+              (keyup.enter)="sendMessage()"
+              type="text"
+              class="message-input"
+              placeholder="Ecrire un message...">
+    </textarea>
+      <button (click)="sendMessage()"
+              class="message-submit">
+        <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>
+      </button>
+    </div>
+
+  </div>
+</div>
+<div class="chat-bubble">
+  <!--<fa-icon [icon]="['far', 'comment-alt']"></fa-icon>-->
+  <div class="icon-container" (click)="status = !status">
+   <i [ngClass]="!status ? 'text-message' : 'close-message is-active'"></i>
+  </div>
+</div>

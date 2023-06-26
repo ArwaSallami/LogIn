@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+// bootstrap import
+@import "~bootstrap/scss/bootstrap";
+//custom imports
+@import "scss/libraries/variables";
+@import "scss/libraries/fonts";
+@import "scss/libraries/mixins";
+@import "scss/libraries/custom-icons";
+@import "scss/libraries/buttons";
+@import "scss/libraries/custom-forms";
+@import "scss/libraries/custom-tables";
+@import "scss/libraries/typeahead-custom";
+//components
+@import "scss/Landing/navbar";
+@import "scss/Landing/footer";
+//Pages
+@import "scss/Landing/homepage";
+@import "scss/shared/not-found";
+@import "scss/Landing/help-page";
+@import "scss/Landing/offers-page";
+@import "scss/Landing/offers-detail-page";
+@import "scss/Landing/new-command";
+@import "scss/Landing/suivcolis";
+@import "scss/Landing/faq-page";
+@import "scss/shared/suivi-exp";
+@import "scss/Landing/payment-confiramtion";
+//new commands steps:
+@import "scss/Landing/step1-new-command";
+@import "scss/Landing/step2-new-command";
+@import "scss/Landing/step3-new-command";
+@import "scss/Landing/step4-new-command";
+@import "scss/Landing/step5-new-command";
+@import "scss/Landing/step6-new-command";
+
+@import "scss/membership/authentification";
+@import "scss/shared/chat-bot";
+@import "scss/libraries/animations";
+
+/*PLATFORM IMPORTS*/
+@import 'scss/platform/layout/layout';
+@import 'scss/platform/layout/primarystyle';
+@import 'scss/platform/layout/pagecontent';
+@import 'scss/platform/layout/header';
+@import 'scss/platform/layout/topnav';
+@import 'scss/platform/layout/sidebar';
+@import 'scss/platform/history';
+@import 'scss/platform/platform-new-command';
+
+@import "scss/global";

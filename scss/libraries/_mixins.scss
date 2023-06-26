@@ -1,0 +1,203 @@
+@mixin box-shadow {
+  -webkit-box-shadow: 0 5px 15px 0 $black-shadow-color;
+  -moz-box-shadow: 0 5px 15px 0 $black-shadow-color;
+  box-shadow: 0 5px 15px 0 $black-shadow-color;
+}
+@mixin tracker-box-shadow {
+  -webkit-box-shadow: 0 0 25px 0 $black-shadow-color2;
+  -moz-box-shadow: 0 0 25px 0 $black-shadow-color2;
+  box-shadow: 0 0 25px 0 $black-shadow-color2;
+}
+@mixin green-box-shadow {
+  -webkit-box-shadow:  0 0 40px 4px $green-box-shadow;
+  -moz-box-shadow:  0 0 40px 4px $green-box-shadow;
+  box-shadow:  0 0 40px 4px $green-box-shadow;
+}
+@mixin video-shadow {
+  -webkit-box-shadow: 0 0 16px 6px $black-shadow-color3;
+  -moz-box-shadow: 0 0 16px 6px $black-shadow-color3;
+  box-shadow: 0 0 16px 6px $black-shadow-color3;
+}
+
+@mixin title-style {
+  text-transform: uppercase;
+  font-size: 36px;
+  color: $black-1;
+  font-family: $bold-font;
+  line-height: 36px;
+}
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin ball {
+  @include center;
+  content: '';
+  display: block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .5);
+  z-index: 2;
+  margin-top: 4px;
+  animation: ball .45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
+}
+@mixin transition($arg) {
+  -webkit-transition: all $arg ease;
+  -moz-transition: all $arg ease;
+  -ms-transition: all $arg ease;
+  -o-transition: all $arg ease;
+  transition: all $arg ease;
+}
+
+/**PLATEFORM MIXINS : **/
+
+@mixin center($xy:xy) {
+  @if $xy == xy {
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    right: auto;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -o-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+  }
+  @else if $xy == x {
+    left: 50%;
+    right: auto;
+    //@include transform(translateX(-50%));
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+  @else if $xy == y {
+    top: 50%;
+    bottom: auto;
+    //@include transform(translateY(-50%));
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+}
+
+// antialiasing mode font rendering
+
+@mixin font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin box-shadow ($color) {
+  -webkit-box-shadow: 0 6px 21px 2px $color;
+  box-shadow: 0 6px 21px 2px $color;
+}
+@mixin small-box {
+  border-radius: 6px;
+  padding: 12px 20px;
+}
+@mixin small-box-color ($color1, $color2) {
+  background-image: -webkit-gradient(linear,left top,right top,from($color1),to($color2)) !important;
+  background-image: -webkit-linear-gradient(left,$color1,$color2) !important;
+  background-image: -moz-linear-gradient(left,$color1,$color2) !important;
+  background-image: -o-linear-gradient(left,$color1,$color2) !important;
+  background-image: linear-gradient(to right,$color1,$color2) !important;
+  background-repeat: repeat-x;
+}
+@mixin small-box-shadow ($color) {
+  -webkit-box-shadow: 0 0 36px 1px $color;
+  -moz-box-shadow: 0 0 36px 1px $color;
+  box-shadow: 0 0 36px 1px $color;
+}
+@mixin default-btn {
+  font-size: 14px;
+  color: #fff;
+  border: 0;
+  padding: 8px 20px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+}
+
+@mixin h3-title {
+  position: relative;
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  font-size: 15px;
+  color: $subtitle-color;
+  border-bottom: 1px solid $light-border;
+  &::after {
+    position: absolute;
+    content: "";
+    background-color: $green-custom;
+    width: 22px;
+    height: 6px;
+    border-radius: 2px;
+    display: block;
+    bottom: -3px;
+    left: 0;
+  }
+}
+@mixin box-container{
+  background-color: #fff;
+  padding: 25px 45px;
+  border-radius: 6px;
+  box-shadow: 0 0 20px 2px $box-shadow;
+  -webkit-box-shadow: 0 0 20px 2px $box-shadow;
+  -moz-box-shadow: 0 0 20px 2px $box-shadow;
+  @include media-breakpoint-down(xs) {
+    padding: 25px 15px;
+  }
+}
+
+@mixin custom-table {
+  margin: 0 0 30px 0;
+  font-size: 14px;
+  font-family: $Regular-font;
+  text-align: center;
+  thead {
+    tr {
+      color: $color-7;
+      font-family: $Regular-font;
+      font-size: 12px;
+      th {
+        border-bottom: 0;
+        text-transform: uppercase;
+      }
+    }
+  }
+  tbody {
+    tr {
+      &:nth-child(odd) {
+        background-color: $strip-color;
+      }
+      td {
+        .success {
+          color: $green-custom;
+        }
+        .error {
+          color: $redalert-color;
+        }
+        .pending {
+          color: $pending-color;
+        }
+        .detail {
+          color:$dark-blue;
+          text-decoration: none;
+          transition: all ease .5s;
+          &:hover {
+            color: $custom-green;
+          }
+        }
+      }
+    }
+  }
+}

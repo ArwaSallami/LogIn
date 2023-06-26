@@ -1,0 +1,69 @@
+<div class="final-step">
+  <div class="code-block">
+    <div class="img-container">
+      <img src="assets/img/check-lg.png" alt="">
+    </div>
+    <div class="text-container">
+      <p>Votre commande est lancée avec succès.</p>
+      <p>l'identifiant de votre colis : <span>{{expedition.publicCode}}</span></p>
+    </div>
+  </div>
+  <div class="qr-code">
+    <div class="main-code">
+      <qrcode [qrdata]="myAngularxQrCode"></qrcode>
+    </div>
+    <div class="text">
+      Vous pouvez télécharger le QR Code et l'attacher sur votre colis,
+       consulter votre facture et/ou la télécharger comme options.
+    </div>
+    <div class="download-link">
+      <!--<button type="button" class="btn green-btn-xs" data-toggle="modal" data-target="#billing-sheet">-->
+        <!--Voir Facture-->
+      <!--</button>-->
+
+      <div ngbDropdown class="dropdown-container" (openChange)="toggled($event)">
+        <button class="btn custom-dropdown-button {{isOpen}}" id="downloadOptions" ngbDropdownToggle>
+          Options
+        </button>
+        <div ngbDropdownMenu aria-labelledby="downloadOptions">
+          <button ngbDropdownItem (click)="downloadQrCode()">
+            <fa-icon [icon]="['fas', 'qrcode']"></fa-icon>
+            Télécharger Qr Code
+          </button>
+          <button ngbDropdownItem data-toggle="modal" data-target="#billing-sheet">
+            <fa-icon [icon]="['far', 'file-pdf']"></fa-icon>
+            Voir Facture
+          </button>
+          <button ngbDropdownItem (click)="generateBill()">
+            <fa-icon [icon]="['fas', 'download']"></fa-icon>
+            Télécharger bordereau
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="button-controls">
+    <button type="submit" class="btn green-btn" (click)="ReloadPage($event)">Terminer</button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="billing-sheet" tabindex="-1" role="dialog" aria-labelledby="billing-sheet" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Facture-{{expedition.publicCode}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-billing-sheet [expedition]="expedition" [price]="price"></app-billing-sheet>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn black-btn" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn green-btn" (click)="generateBill()">Télécharger</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,151 @@
+<header class="cd-main-header">
+  <a href="#0" class="cd-logo"><img src="assets/img/log-in-logo.svg" alt="Logo"></a>
+  <!--<a href="#0" class="cd-nav-trigger"><span></span></a>-->
+  <!-- Mobile version -->
+    <div ngbDropdown class="mobile-menu" (openChange)="toggled($event)">
+        <span ngbDropdownToggle class="cd-nav-trigger {{isOpen}}" id="sm-account-menu">
+            <span></span>
+        </span>
+        <div ngbDropdownMenu aria-labelledby="sm-account-menu">
+                <div class="menu-link overview has-children" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                    <i class="left"></i>
+                    <a (click)="toggledChild()">Historique Des Colis
+                    </a>
+                  <ul>
+                    <li><a routerLink="historique" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Envoyés</a></li>
+                    <li><a routerLink="historique-recu" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Reçus</a></li>
+                  </ul>
+                </div>
+                <div class="menu-link contacts" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                    <i class="left"></i>
+                    <a routerLink="nouvelle-commande">Nouvelle Commande</a>
+                </div>
+                <div class="menu-link campaigns" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                    <i class="left"></i>
+                    <a routerLink="suivi-commande">Suivi Des Commandes
+                    </a>
+                </div>
+                <div class="menu-link reclamation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                    <i class="left"></i>
+                    <a routerLink="reclamation">Reclamation
+                    </a>
+                </div>
+
+
+                <div class="menu-link account" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                    <i class="left"></i>
+                    <a routerLink="settings">Mon Profil</a>
+                </div>
+                <div class="menu-link logout">
+                    <i class="left"></i>
+                    <a  routerLink="/login" (click)="logout()">Déconnexion</a>
+                </div>
+        </div>
+    </div>
+
+  <nav class="cd-nav">
+    <!--<ul class="cd-top-nav">-->
+      <!--<li class="has-children account">-->
+        <!--<a href="#0" class="hello-user">-->
+          <!--<i class="fas fa-user-circle"></i>-->
+          <!---->
+        <!--</a>-->
+
+        <!--<ul>-->
+          <!--<li><a href="#0"></a></li>-->
+          <!--<li><a href="#0">Déconnexion</a></li>-->
+        <!--</ul>-->
+      <!--</li>-->
+    <!--</ul>-->
+    <!-- Desktop version -->
+      <div ngbDropdown class="cd-top-nav">
+          <button class="account-menu" id="account-menu" ngbDropdownToggle>
+              Bonjour {{user.firstName + ' ' + user.lastName}}
+          </button>
+          <div ngbDropdownMenu aria-labelledby="account-menu">
+              <a routerLink="settings" class="menu-link" ngbDropdownItem>Mon Profil</a>
+              <a routerLink="/logout" class="menu-link" ngbDropdownItem (click)="logout()" >Déconnexion</a>
+          </div>
+      </div>
+  </nav>
+
+</header> <!-- .cd-main-header -->
+
+<main class="cd-main-content">
+  <nav class="cd-side-nav">
+    <ul class="nav-content">
+      <li class="cd-label">Espace Client</li>
+      <li class="overview has-children" [ngClass]="{
+        'active': child}" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <i class="left"></i>
+        <a (click)="toggledChild()">Historique Des Colis
+            <span class="arrow-icn" [ngClass]="{
+        'rotate': child}"><fa-icon [icon]="['fas', 'sort-down']" ></fa-icon></span>
+          <!--<span class="count" *ngIf="finishedNbr!== -1">{{finishedNbr}}</span>-->
+        </a>
+          <ul>
+          <li><a routerLink="historique" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Envoyés</a></li>
+          <li><a routerLink="historique-recu" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Reçus</a></li>
+          </ul>
+      </li>
+      <li class="contacts" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <i class="left"></i>
+        <a routerLink="nouvelle-commande">Nouvelle Commande</a>
+      </li>
+      <li class="campaigns has-children"
+          [ngClass]="{'active': child2}"
+          routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <i class="left"></i>
+          <a (click)="toggledChild2()">Suivi Des Commandes
+              <span class="arrow-icn" [ngClass]="{'rotate': child2}">
+                  <fa-icon [icon]="['fas', 'sort-down']" ></fa-icon></span>
+          </a>
+          <ul>
+              <li><a routerLink="suivi-commande" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Envoyés</a></li>
+              <li><a routerLink="suivi-commande-reçu" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Reçus</a></li>
+          </ul>
+      </li>
+      <li class="reclamation has-children"
+          [ngClass]="{'active': child3}"
+          routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="left"></i>
+          <a (click)="toggleChild3()"> Reclamations
+            <span class="arrow-icn" [ngClass]="{'rotate': child3}">
+              <fa-icon [icon]="['fas', 'sort-down']"></fa-icon>
+            </span>
+          </a>
+        <ul>
+          <li><a routerLink="reclamation/add" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Nouvelle réclamation</a> </li>
+          <li><a routerLink="reclamation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"> Historique des réclamations
+          </a> </li>
+        </ul>
+
+
+
+
+      </li>
+      <li class="account" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" >
+        <i class="left"></i>
+        <a routerLink="settings">Mon Profil</a>
+      </li>
+      <li class="stats"><a routerLink="stats">Statistiques</a></li>
+      <li class="logout" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <i class="left"></i>
+        <a routerLink="/logout">Déconnexion</a>
+      </li>
+
+    </ul>
+  </nav>
+
+  <div class="content-wrapper">
+    <div class="container-fluid main-container p-0 mt-5">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="main-footer">
+      <p>
+        {{copyright}}
+      </p>
+    </div>
+  </div> <!-- .content-wrapper -->
+</main> <!-- .cd-main-content -->
+<ng4-loading-spinner> </ng4-loading-spinner>

@@ -1,0 +1,45 @@
+<div class="payment-block">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="block-title">
+        informations relatives à votre facture
+      </h3>
+      <h3 class="green-title">
+        Ramassage
+      </h3>
+      <p>Référence de l'expédition: {{expedition.publicCode}}</p>
+      <p>Expédition facturée par : Log’In EXPRESS</p>
+      <p>Montant Total (en TTC): {{calcDec(expedition.totalIncVat)}}DT</p>
+      <p>Date du jour: {{expedition.createdAt | date:'d'}}/{{expedition.createdAt | date:'M'}}/{{expedition.createdAt | date:'y'}}</p>
+    </div>
+    <div class="col-md-12">
+      <h3 class="block-title mt-4">
+        Sélectionnez votre moyen de paiement
+      </h3>
+      <div class="payment-methods">
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <button type="button" class="btn image-button green-bg" (click)="onConfirme()" awNextStep>
+              Cash
+            </button>
+          </li>
+          <li class="list-inline-item">
+            <button type="button" class="btn image-button gray-bg" (click)="onOnlinePayment()" >
+              <img src="assets/img/visa.png" alt="visa">
+            </button>
+          </li>
+          <li class="list-inline-item">
+            <button type="button" class="btn image-button blue-bg" (click)="onOnlinePayment()" >
+              <img src="assets/img/MasterCard.png" alt="mastercard">
+            </button>
+          </li>
+          <li class="list-inline-item">
+            <button type="button" class="btn image-button purple-bg" (click)="onConfirme()" awNextStep>
+              E-Dinar
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

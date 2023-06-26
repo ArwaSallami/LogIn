@@ -1,0 +1,169 @@
+.content-wrapper {
+  .main-container {
+    .box-items {
+      cursor: pointer;
+      .slick-list.draggable {
+        .slick-track {
+          padding: 25px 0;
+        }
+      }
+      .main-box {
+        display: inline-block;
+        margin: 0 15px;
+        .colored-box {
+          height: 145px;
+          width: 260px;
+          display: inline-block;
+          .box-head {
+            height: 57px;
+            p {
+              display: inline-block;
+              float: right;
+              text-transform: uppercase;
+              font-size: 14px;
+              letter-spacing: .9px;
+              opacity: .8;
+              margin-top: 8px;
+            }
+          }
+          h3 {
+            font-family: $Medium-font;
+            font-size: 26px;
+            text-align: right;
+            margin-bottom: 12px;
+          }
+          p {
+            font-size: 12px;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1.425px;
+            margin-bottom: 8px;
+          }
+        }
+        .purple-box {
+          position: relative;
+          .icon-bg {
+            position: absolute;
+            background-image: url('/assets/img/wallet-icon.svg');
+            background-size: 100%;
+            height: 100%;
+            width: 100%;
+            z-index: 0;
+            opacity: .1;
+            overflow: hidden;
+            bottom: 0;
+            right: 0;
+          }
+          .box-head {
+            .wallet-icon {
+              background: url('/assets/img/wallet-icon.svg') no-repeat;
+              display: inline-block;
+              width: 50px;
+              height: 50px;
+            }
+          }
+        }
+        .blue-box {
+          position: relative;
+          .icon-bg {
+            position: absolute;
+            background-image: url('/assets/img/progress-icon.svg');
+            background-size: 100%;
+            height: 100%;
+            width: 100%;
+            z-index: 0;
+            opacity: .1;
+            overflow: hidden;
+            bottom: 0;
+            right: 0;
+          }
+          .progress-icon {
+            background: url('/assets/img/progress-icon.svg') no-repeat;
+            display: inline-block;
+            width: 42px;
+            height: 42px;
+            margin-top: 4px;
+          }
+        }
+        .red-box {
+          position: relative;
+          .icon-bg {
+            position: absolute;
+            background-image: url('/assets/img/recharge-icon.svg');
+            background-size: 100%;
+            height: 100%;
+            width: 100%;
+            z-index: 0;
+            opacity: .1;
+            overflow: hidden;
+            bottom: 0;
+            right: 0;
+          }
+          .refill-icon {
+            background: url('/assets/img/recharge-icon.svg') no-repeat;
+            display: inline-block;
+            width: 42px;
+            height: 42px;
+            margin-top: 4px;
+          }
+        }
+      }
+    }
+  }
+  .main-bloc {
+    .main-head {
+      h3 {
+        @include h3-title;
+      }
+    }
+  }
+  .box {
+    padding: 25px;
+    .sort-select {
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .search-container {
+      margin-bottom: 15px;
+      .input-group {
+        font-size: 14px;
+        width: 50%;
+        margin-right: 0;
+        margin-left: auto;
+        @include media-breakpoint-down(sm) {
+          width: 100%;
+        }
+        input {
+          padding-left: 35px;
+        }
+      }
+      .search-input {
+        position: relative;
+        &:after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 12px;
+          transform: translateY(-50%);
+          background-image: url('assets/img/search.svg');
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+          width: 15px;
+          height: 15px;
+          z-index: 99;
+        }
+      }
+    }
+    .table-container {
+      min-height: 120px;
+      @include custom-table;
+    }
+    .controls {
+      border-top: 1px solid $light-border;
+      .prim-btn {
+        margin-top: 20px;
+      }
+    }
+  }
+}

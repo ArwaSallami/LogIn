@@ -1,0 +1,210 @@
+.auth-layout {
+  background-image: url('assets/img/member-layout.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  height: 100%;
+  .container-fluid {
+    min-height: 100vh;
+    height: 100%;
+  }
+  .goback-control {
+    margin-left: 20px;
+    margin-top: 5%;
+    a {
+      text-decoration: none;
+      font-size: 20px;
+      color: $black-1;
+      display: inline-block;
+      padding: 20px 0;
+      span {
+        border-bottom: 1px solid transparent;
+        transition: all ease .3s;
+      }
+      &:hover {
+        span {
+          border-bottom: 1px solid $black-1;
+        }
+      }
+      @include media-breakpoint-down(xs) {
+        font-size: 16px;
+      }
+    }
+  }
+  .logo-container {
+    text-align: center;
+      margin: 70px 0 50px 0;
+      img {
+        max-width: 255px;
+        width: 100%;
+        height: auto;
+      }
+    }
+  .auth-container {
+    background-color: #fff;
+    max-width: 540px;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 3px;
+    padding: 30px;
+    @include tracker-box-shadow;
+    @include media-breakpoint-down(xs) {
+      padding: 20px 10px;
+    }
+    .auth-title {
+      p {
+        position: relative;
+        text-transform: uppercase;
+        font-size: 24px;
+        color: $black-1;
+        font-family: $bold-font;
+        padding-left: 16px;
+        margin-bottom: 20px;
+        @include media-breakpoint-down(xs) {
+          font-size: 18px;
+          padding-left: 30px;
+        }
+        .bar-icon {
+          position: absolute;
+          display: inline-block;
+          top: 22px;
+          left: -30px;
+          height: 8px;
+          width: 38px;
+          background-image: url("assets/img/green-bar.svg");
+          background-repeat: no-repeat;
+          background-size: 100%;
+          @include media-breakpoint-down(xs) {
+            top: 14px;
+            left: -10px;
+          }
+        }
+      }
+    }
+    .login-form {
+      .form-group {
+        label {
+          font-size: 18px;
+          font-family: $medium-font;
+        }
+      }
+      .forgot-link {
+        font-size: 18px;
+        color: $green-1;
+        text-align: right;
+        display: block;
+        text-decoration: none;
+        cursor: pointer;
+        span {
+          color: $black-1;
+        }
+      }
+      .button-controls {
+        text-align: center;
+        margin: 30px 0;
+        button {
+          width: 75%;
+          margin: 0 auto;
+        }
+      }
+    }
+    .register-link, .login-link {
+      text-align: center;
+      font-size: 18px;
+      color: $green-1;
+      display: block;
+      text-decoration: none;
+      cursor: pointer;
+      span {
+        color: $black-1;
+      }
+    }
+    &.register {
+      max-width: 730px;
+      width: 100%;
+      .form-group {
+        label {
+          font-size: 18px;
+          font-family: $medium-font;
+        }
+      }
+      .button-controls {
+        text-align: center;
+      }
+    }
+  }
+  .account-creation {
+    .image-content {
+      text-align: center;
+      margin-bottom: 30px;
+      img {
+        max-width: 83px;
+        width: 100%;
+        height: auto;
+      }
+    }
+    .text-content {
+      text-align: center;
+      margin-bottom: 30px;
+      .green-text {
+        font-family: $medium-font;
+        color: $green-1;
+        font-size: 22px;
+      }
+      .default-text {
+        font-size: 20px;
+        max-width: 410px;
+        margin: 30px auto;
+      }
+      .redirection-text {
+        color: $gray-2;
+        font-size: 16px;
+        margin: 30px 0;
+      }
+    }
+  }
+  .contact-form {
+    .custom-checkbox {
+      font-size: 16px;
+      margin-bottom: 30px;
+      span {
+        font-size: 16px;
+        color: $green-1;
+        padding-left: 2px;
+        margin-bottom: 0;
+        vertical-align: bottom;
+        display: inline-block;
+        text-decoration: underline;
+      }
+    }
+    .button-controls {
+      margin-bottom: 30px;
+    }
+  }
+  app-membership-footer {
+    .footer-container {
+      text-align: center;
+      padding: 60px 0;
+      p {
+        margin: 0;
+      }
+    }
+  }
+  .account-confirmation {
+    text-align: center;
+    img {
+      max-width: 84px;
+      height: auto;
+      margin-bottom: 30px;
+    }
+    p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+    .green-btn {
+      display: block;
+      width: 100%;
+    }
+  }
+}

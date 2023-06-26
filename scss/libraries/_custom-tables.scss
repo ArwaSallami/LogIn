@@ -1,0 +1,93 @@
+.custom-table {
+  border: 0;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+  thead th, tbody tr td {
+    border: 0;
+  }
+  thead th {
+    font-size: 16px;
+    font-family: $medium-font;
+    letter-spacing: .425px;
+    font-weight: normal;
+    vertical-align: middle;
+
+    &:first-child {
+      color: $green-1;
+    }
+  }
+  tbody + tbody {
+    border: 0;
+  }
+  tbody tr td {
+    font-size: 14px;
+    vertical-align: middle;
+    &:first-child {
+      font-family: $bold-font;
+    }
+  }
+  caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+  }
+  tr {
+    border: 0;
+    padding: .35em;
+  }
+  th, td {
+    padding: .625em;
+    text-align: left;
+  }
+}
+@include media-breakpoint-down(sm){
+  .custom-table {
+    border: 0;
+    tbody tr td {
+      border-bottom: 1px solid $border-color;
+    }
+    caption {
+      font-size: 1.3em;
+    }
+    thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    tr {
+      background-color: #fff;
+      display: block;
+      margin-bottom: .625em;
+      border: 1px solid $border-color;
+    }
+    td {
+      border-bottom: 1px solid $border-color;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+      border-top: 0;
+      &:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: $black-1;
+        @media (max-width: 400px) {
+          display: block;
+          width: 100%;
+          text-align: left;
+        }
+      }
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+}

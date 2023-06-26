@@ -1,0 +1,53 @@
+app-plateform-layout {
+  background-color: $content-bg-color;
+  display: block;
+  height: 100%;
+}
+.cd-main-content {
+
+  .content-wrapper {
+    padding: $header-height-S 3% 3em;
+
+    h1 {
+      text-align: center;
+      padding: 3em 0;
+      font-size: 2rem;
+    }
+  }
+
+  &::before {
+    /* never visible - used to check MQ in jQuery */
+    display: none;
+    content: 'mobile';
+  }
+
+  @include MQ(M) {
+    .content-wrapper {
+      margin-left: $sidebar-width-M;
+      padding-top: $header-height-M;
+
+      h1 {
+        padding: 4em 0;
+        font-size: 3.2rem;
+        font-weight: 300;
+      }
+    }
+
+    &::before {
+      content: 'tablet';
+    }
+  }
+
+  @include MQ(L) {
+
+    .content-wrapper {
+      margin-left: $sidebar-width-L;
+      height: 100vh;
+      overflow-y: scroll;
+    }
+
+    &::before {
+      content: 'desktop';
+    }
+  }
+}

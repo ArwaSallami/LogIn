@@ -1,0 +1,21 @@
+<div class="detail-offer-container" *ngIf='offer'>
+
+  <div class="image-container">
+    <img src="{{offer.imageUrl}}" alt="">
+    <div class="image-title">
+      <h3>
+        {{offer.offerName}}
+      </h3>
+    </div>
+  </div>
+  <div class="offer-content">
+    <p class="offer-text" [innerHTML]="offer.text">
+    </p>
+    <ul class="list-unstyled box-list">
+      <li  *ngFor=" let doffer of offer.emballage">
+        <p [innerHTML]="doffer.emballageText"></p>
+      </li>
+    </ul>
+  </div>
+
+</div>

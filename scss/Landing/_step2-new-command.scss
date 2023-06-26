@@ -1,0 +1,293 @@
+.tarification-detail {
+  .text-content {
+    h3 {
+      font-family: $bold-font;
+      font-size: 18px;
+      text-transform: uppercase;
+      @include media-breakpoint-down(sm) {
+        font-size: 16px;
+      }
+      @include media-breakpoint-down(sm) {
+        font-size: 14px;
+      }
+    }
+  }
+  .available-offers {
+    margin-bottom: 20px;
+    .custom-radio-btn {
+      width: 100%;
+      margin-bottom: 8px;
+      .custom-control-label {
+        width: 100%;
+        .service-label {
+          width: 100%;
+          display: table;
+          span {
+            display: table-cell;
+            vertical-align: middle;
+            &.text {
+              text-align: left;
+            }
+            &.price {
+              text-align: right;
+            }
+          }
+        }
+      }
+    }
+  }
+  .expedition-date {
+    margin-bottom: 8px;
+    .expedition-datepicker {
+      width: 100%;
+      .expedition-label {
+        margin-right: 18px;
+        @include media-breakpoint-down(sm) {
+          width: 100%;
+          display: block;
+        }
+      }
+    }
+  }
+  .expedition-time {
+    .custom-select {
+      max-width: 300px;
+      @include media-breakpoint-down(md) {
+        max-width: 100%;
+      }
+    }
+  }
+  .packages-row {
+    margin-top: 38px;
+    .packages-table {
+      table {
+        thead {
+          th {
+            &:first-child {
+              width: 145px;
+            }
+          }
+        }
+        tbody {
+          tr {
+            td {
+              .custom-select-sm {
+                max-width: 250px;
+              }
+              .insurance-input {
+                input {
+                  @include media-breakpoint-down(sm) {
+                    max-width: 140px;
+                    margin-left: auto;
+                    margin-right: 0;
+                  }
+                }
+                .input-group-append {
+                  .input-group-text {
+                    padding-right: 0;
+                    border: 0;
+                    background-color: transparent;
+                    font-size: 14px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .simulation-results {
+    .black-title {
+      margin-top: 30px;
+      font-family: $bold-font;
+      font-size: 18px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      @include media-breakpoint-down(sm) {
+        font-size: 16px;
+      }
+      @include media-breakpoint-down(sm) {
+        font-size: 14px;
+      }
+    }
+    .result-detail {
+      background-color: #fff;
+      border: 1px solid $border-color;
+      padding: 20px 15px 0 15px;
+      .promo-title {
+        font-size: 18px;
+      }
+      .discount-code {
+        .input-group {
+          width: 100%;
+          input {
+            margin-bottom: 0 !important;
+          }
+        }
+        .discount-value {
+          font-size: 14px;
+          span {
+            color: $green-1;
+            font-family: $medium-font;
+          }
+        }
+      }
+      .result {
+        display: flex;
+        text-align: right;
+        p {
+          width: 50%;
+          font-family: $bold-font;
+          font-size: 18px;
+          text-transform: uppercase;
+          @include media-breakpoint-down(sm) {
+            font-size: 16px;
+          }
+          @include media-breakpoint-down(sm) {
+            font-size: 14px;
+            letter-spacing: initial;
+          }
+        }
+      }
+    }
+  }
+  .billing-informations {
+    margin-top: 24px;
+    .accordion {
+      .card {
+        border: 2px dashed $green-1;
+        .card-header {
+          background-color: #fff;
+          border: none;
+          h5 {
+            button {
+              width: 100%;
+              text-align: left;
+              text-decoration: none;
+              color: $black-1;
+              font-size: 18px;
+              text-transform: uppercase;
+            }
+          }
+        }
+        .collapse {
+          .card-body {
+            .billing-rule {
+              .rule-text {
+                p {
+                  font-size: 14px;
+                  font-family: $regular-font;
+                  margin-bottom: 8px;
+                }
+              }
+            }
+            .package-shop {
+              display: flex;
+              .img-container {
+                width: 80px;
+                img {
+                  display: block;
+                  max-width: 75px;
+                  width: 100%;
+                  height: auto;
+                }
+              }
+              .text {
+                width: calc(100% - 80px);
+                p {
+                  font-size: 14px;
+                  font-family: $regular-font;
+                  margin-bottom: 8px;
+                  a {
+                    color: $green-1;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .button-controls {
+    text-align: right;
+    margin-top: 20px;
+    button {
+      margin-bottom: 10px;
+      &:last-child {
+        margin-left: 18px;
+        @media(max-width: 400px) {
+          margin-left: 0;
+        }
+      }
+    }
+    @media (max-width: 400px) {
+      button{
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}
+.package-alert {
+  .package-alert-image {
+    max-width: 135px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 40px;
+  }
+}
+
+.info-alert {
+  border: 2px dashed #fe3f4c;
+  text-align: left;
+  padding: 12px 16px;
+  margin-bottom: 5%;
+  background-color: rgba(254, 63, 76, 0.05);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+////////////
+.rule-image {
+  width: 60px;
+  display: flex;
+  img {
+    display: block;
+    max-width: 45px;
+    width: 100%;
+    height: auto;
+  }
+}
+.rule-text {
+  width: calc(100% - 80px);
+
+  p {
+    font-size: 14px;
+
+    margin-bottom: 8px;
+  }
+}
+.select-rec.col-md-12 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#methode-rec {
+  display: flex;
+  flex-direction: row;
+}
+.rec-label{
+  margin-right: 15px;
+}
+@media (max-width: 676px) {
+  .select-rec.col-md-12 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+
+}

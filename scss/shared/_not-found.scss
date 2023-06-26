@@ -1,0 +1,19 @@
+.not-found {
+  margin: 90px 0;
+  text-align: center;
+  .not-found-img {
+    width: 100%;
+    height: auto;
+  }
+  .not-found-text {
+    font-size: 24px;
+    font-family: $regular-font;
+    margin: 38px 0 50px;
+    @include media-breakpoint-down(md) {
+      font-size: 20px;
+    }
+    @include media-breakpoint-down(xs) {
+      font-size: 18px;
+    }
+  }
+}

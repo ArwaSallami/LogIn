@@ -1,0 +1,41 @@
+button.calendar, button.calendar:active {
+    width: 2.75rem;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAcCAYAAAAEN20fAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEUSURBVEiJ7ZQxToVAEIY/YCHGxN6XGOIpnpaEsBSeQC9ArZbm9TZ6ADyBNzAhQGGl8Riv4BLAWAgmkpBYkH1b8FWT2WK/zJ8ZJ4qiI6XUI3ANnGKWBnht2/ZBDRK3hgVGNsCd7/ui+JkEIrKtqurLpEWaphd933+IyI3LEIdpCYCiKD6HcuOa/nwOa0ScJEnk0BJg0UTUWJRl6RxCYEzEmomsIlPU3IPW+grIAbquy+q6fluy/28RIBeRMwDXdXMgXLj/B2uimRXpui4D9sBeRLKl+1N+L+t6RwbWrZliTTTr1oxYtzVWiTQAcRxvTX+eJMnlUDaO1vpZRO5NS0x48sIwfPc87xg4B04MCzQi8hIEwe4bl1DnFMCN2zsAAAAASUVORK5CYII=)!important;
+    background-repeat: no-repeat;
+    background-size: 23px;
+    background-position: center;
+}
+.btn-outline-secondary:hover {
+    background-color: #54be73;
+}
+.input-group {
+    margin: 1rem 0;
+}
+span.custom-day.range {
+    color: #55be74ba;
+}
+.list-stats {
+    margin-top: 2rem;
+    p {
+        display: flex;
+        justify-content: space-between;
+        label {
+            text-transform: uppercase;
+            cursor: pointer;
+            &:hover {
+                 font-family: "Apercu Bold";
+            }
+        }
+    }
+}
+.dateDebutLabel label, .dateFinLabel label {
+    margin: 0;
+}
+@media(max-width:767px) {
+    .dateFinLabel {
+        order: 1;
+    }
+    .dateFinInput {
+        order: 2;
+    }
+}

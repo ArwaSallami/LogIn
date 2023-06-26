@@ -1,0 +1,558 @@
+.btn {
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+.green-btn-lg {
+  background-color: $green-1;
+  border-radius: 0;
+  border: none;
+  font-size: 24px;
+  //line-height: 18px;
+  color: #fff;
+  padding: 17px 24px;
+  //height: 70px;
+  text-transform: uppercase;
+  //width: 100%;
+  width: auto;
+  transition: all .3s ease;
+  @include media-breakpoint-only(md) {
+    font-size: 20px;
+    padding: 20px 24px;
+  }
+  @include media-breakpoint-down(sm) {
+    font-size: 18px;
+    padding: 22px 24px;
+  }
+  &:hover, &:focus, &:active {
+    @include green-box-shadow;
+    background-color: $green-3;
+    color: #fff;
+  }
+}
+.green-btn {
+  background-color: $green-1;
+  border-radius: 0;
+  border: 2px solid $green-1;
+  color: #fff;
+  letter-spacing: 0.725px;
+  font-size: 20px;
+  padding: 12px 34px;
+  text-transform: uppercase;
+  width: auto;
+  transition: all .3s ease;
+  @include media-breakpoint-only(md) {
+    font-size: 18px;
+    padding: 12px 24px;
+  }
+  @include media-breakpoint-down(sm) {
+    font-size: 16px;
+    padding: 12px 22px;
+  }
+  &:hover, &:focus, &:active {
+    border: 2px solid $green-3;
+    background-color: $green-3;
+    color: #fff;
+  }
+}
+.black-btn {
+  background-color: transparent;
+  border-radius: 0;
+  border: 2px solid $gray-7;
+  color: $gray-7;
+  letter-spacing: 0.725px;
+  font-size: 20px;
+  padding: 12px 34px;
+  text-transform: uppercase;
+  width: auto;
+  transition: all .3s ease;
+  @include media-breakpoint-only(md) {
+    font-size: 18px;
+    padding: 12px 24px;
+  }
+  @include media-breakpoint-down(sm) {
+    font-size: 16px;
+    padding: 12px 22px;
+  }
+  &:hover, &:focus, &:active {
+    background-color: $gray-7;
+    color: #fff;
+  }
+}
+.green-btn-sm {
+  background-color: $green-1;
+  border-radius: 0;
+  border: 2px solid $green-1;
+  color: #fff;
+  letter-spacing: 0.725px;
+  font-size: 16px;
+  padding: 12px 34px;
+  text-transform: uppercase;
+  width: auto;
+  transition: all .3s ease;
+  @include media-breakpoint-only(md) {
+    padding: 12px 24px;
+  }
+  @include media-breakpoint-down(sm) {
+    padding: 12px 22px;
+  }
+  &:hover, &:focus, &:active {
+    @include green-box-shadow;
+    border: 2px solid $green-3;
+    background-color: $green-3;
+    color: #fff;
+  }
+}
+.black-btn-sm {
+  background-color: transparent;
+  border-radius: 0;
+  border: 2px solid $gray-7;
+  color: $gray-7;
+  letter-spacing: 0.725px;
+  font-size: 16px;
+  padding: 12px 34px;
+  text-transform: uppercase;
+  width: auto;
+  transition: all .3s ease;
+  @include media-breakpoint-only(md) {
+    padding: 12px 24px;
+  }
+  @include media-breakpoint-down(sm) {
+    padding: 12px 22px;
+  }
+  &:hover, &:focus, &:active {
+    background-color: $gray-7;
+    color: #fff;
+  }
+}
+.green-btn-xs {
+  background-color: $green-1;
+  border-radius: 0;
+  border: 2px solid $green-1;
+  color: #fff;
+  letter-spacing: 0.725px;
+  font-size: 16px;
+  padding: 12px 34px;
+  text-transform: uppercase;
+  width: auto;
+  transition: all .3s ease;
+  @include media-breakpoint-only(md) {
+    padding: 12px 24px;
+  }
+  @include media-breakpoint-down(sm) {
+    padding: 12px 22px;
+  }
+  &:hover, &:focus, &:active {
+    @include green-box-shadow;
+    border: 2px solid $green-3;
+    background-color: $green-3;
+    color: #fff;
+  }
+}
+.black-btn-xs {
+  background-color: transparent;
+  border-radius: 0;
+  border: 2px solid $gray-7;
+  color: $gray-7;
+  letter-spacing: 0.725px;
+  font-size: 16px;
+  padding: 12px 34px;
+  text-transform: uppercase;
+  width: auto;
+  transition: all .3s ease;
+  @include media-breakpoint-only(md) {
+    padding: 12px 24px;
+  }
+  @include media-breakpoint-down(sm) {
+    padding: 12px 22px;
+  }
+  &:hover, &:focus, &:active {
+    background-color: $gray-7;
+    color: #fff;
+  }
+}
+.green-rounded-btn {
+  background-color: $green-1;
+  border-radius: 3px;
+  border: 2px solid $green-1;
+  color: #fff;
+  letter-spacing: 0.725px;
+  font-size: 16px;
+  padding: 8px 28px;
+  width: auto;
+  transition: all .3s ease;
+  @include media-breakpoint-only(md) {
+    font-size: 18px;
+    padding: 12px 24px;
+  }
+  @include media-breakpoint-down(sm) {
+    font-size: 16px;
+    padding: 12px 22px;
+  }
+  &:hover, &:focus, &:active {
+    border: 2px solid $green-3;
+    background-color: $green-3;
+    color: #fff;
+  }
+}
+/*Custom Radio Button*/
+.custom-radio {
+  .custom-control-input:checked ~ .custom-control-label {
+    &::before {
+      color: #fff;
+      border: 1px solid $green-1;
+      background-color: #fff;
+      outline: none;
+      box-shadow:none !important;
+    }
+    &::after {
+      //background-image: $custom-radio-indicator-icon-checked;
+      background-image: url("assets/img/green-dot.svg");
+      //top: 0.45rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+.custom-control-label {
+  &::before {
+    border: 1px solid $black-1;
+    //top: .45rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+/*custom radio type-2*/
+.custom-radio-btn {
+  cursor: pointer;
+  border: 1px solid $black-1;
+  padding-left: $custom-control-gutter + $custom-control-indicator-size + .8rem;
+  margin-right: 4px;
+  &.is-checked {
+    background-color: $green-1;
+    color: #fff;
+    border: 1px solid $green-1;
+  }
+  .custom-control-label {
+    padding-top: .6rem;
+    padding-bottom: .6rem;
+    padding-right: .8rem;
+    cursor: pointer;
+  }
+  .custom-control-input:checked ~ .custom-control-label {
+    &::before {
+      color: #fff;
+      border: 1px solid #fff;
+      background-color: $green-1;
+      outline: none;
+      box-shadow:none !important;
+    }
+    &::after {
+      //background-image: $custom-radio-indicator-icon-checked;
+      background-image: url("assets/img/white-dot.svg");
+      //top: 0.45rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+/*custom checkbox button*/
+.custom-checkbox {
+  font-size: 14px;
+  cursor: pointer;
+  .custom-control-label {
+    padding-top: 2px;
+    &:before {
+      top: 0;
+      transform: translateY(25%);
+      border-radius: 0;
+    }
+  }
+  .custom-control-input {
+    &:focus ~ .custom-control-label {
+      &:before {
+        outline: none;
+        box-shadow: none;
+        border: 1px solid $green-1;
+      }
+    }
+    &:checked ~ .custom-control-label {
+      &:before {
+        color: #fff;
+        border-color: $green-1;
+        background-color: $green-1;
+      }
+    }
+  }
+}
+/*icon button*/
+.btn-icon {
+  background-color: transparent;
+  &:focus, &:active, &:visited {
+    outline: none;
+    box-shadow: none;
+    border: 0;
+  }
+}
+.btn-add {
+  position: relative;
+  padding-left: 30px;
+  font-size: 16px;
+  color: $green-1;
+  &:before {
+    content: '';
+    background-image: url("assets/img/add-icon.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    display: block;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translate(0, -50%);
+  }
+  &:focus, &:active, &:hover {
+    outline: none;
+    box-shadow: none;
+    color: $green-1;
+  }
+}
+.btn-duplicate {
+  position: relative;
+  padding-left: 30px;
+  font-size: 16px;
+  color: $green-1;
+  &:before {
+    content: '';
+    background-image: url("assets/img/duplicate-icon.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    display: block;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translate(0, -50%);
+  }
+  &:focus, &:active, &:hover {
+    outline: none;
+    box-shadow: none;
+    color: $green-1;
+  }
+}
+.image-button {
+  font-size: 18px;
+  height: 48px;
+  font-family: $bold-italic-font;
+  color: #fff;
+  img {
+    height: 30px;
+    width: 53px;
+    object-fit: contain;
+  }
+  &.gray-bg {
+    background-color: #d4dadd;
+    border-bottom: 3px solid #959fa4;
+  }
+  &.blue-bg {
+    background-color: #3c69bb;
+    border-bottom: 3px solid #295195;
+  }
+  &.purple-bg {
+    background-color: #821e63;
+    border-bottom: 3px solid #581142;
+    color: #ebb908;
+  }
+  &.green-bg {
+    background-color: $green-1;
+    border-bottom: 3px solid $green-3;
+    color: #fff;
+  }
+}
+.custom-dropdown-button {
+  padding: 14px 34px 14px 24px;
+  color: #fff;
+  background-color: $green-1;
+  border: 0;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-size: 18px;
+  &:focus {
+    outline: none;
+    box-shadow:none;
+  }
+  &:hover {
+    background-color: $green-3;
+    color: #fff;
+  }
+  &.is-closed {
+    position: relative;
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 4px 4px 0 4px;
+      border-color: #fff transparent transparent transparent;
+    }
+  }
+  &.is-open {
+    position: relative;
+    &:after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-style: solid;
+      border-width: 0 4px 4px 4px;
+      border-color: transparent transparent #fff transparent;
+    }
+  }
+}
+.dropdown-wrapper {
+  .custom-dropdown {
+    padding: 10px 34px 10px 24px;
+    color: $black-1;
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    font-size: 16px;
+    &:focus {
+      outline: none;
+      box-shadow:none;
+    }
+    &:hover {
+      background-color: $gray-5;
+    }
+    &.is-closed {
+      position: relative;
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 4px 4px 0 4px;
+        border-color: $black-1 transparent transparent transparent;
+      }
+    }
+    &.is-open {
+      position: relative;
+      &:after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 0;
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        border-style: solid;
+        border-width: 0 4px 4px 4px;
+        border-color: transparent transparent $black-1 transparent;
+      }
+    }
+    a {
+      display: block;
+    }
+  }
+  .dropdown-menu {
+    top: 42px;
+    width: 100%;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    a {
+      display: block !important;
+      &:hover {
+        background-color: $gray-0 !important;
+      }
+    }
+  }
+}
+/**ADMIN PLATEFORM : **/
+
+.succ-btn {
+  @include default-btn;
+}
+.err-btn {
+  @include default-btn;
+}
+.dan-btn {
+  @include default-btn;
+}
+.prim-btn {
+  @include default-btn;
+  @include small-box-color($green-custom,$gradiant-green);
+  @include small-box-shadow ($green-shadow);
+  &:focus {
+    @include default-btn;
+    @include small-box-color($green-custom,$gradiant-green);
+    @include small-box-shadow ($green-shadow);
+  }
+  &:active {
+    @include default-btn;
+    @include small-box-color($green-custom,$gradiant-green);
+    @include small-box-shadow ($green-shadow);
+  }
+  &:hover {
+    color: #fff;
+  }
+}
+.icon-radio-btn {
+  cursor: pointer;
+  padding: 10px 15px 10px 35px;
+  border-bottom: 2px solid transparent;
+  .custom-control-label {
+    letter-spacing: .425px;
+    &:before {
+      opacity: 0;
+    }
+  }
+  &.is-checked {
+    border-bottom: 2px solid $green-1;
+    //background-color: $green-opacity-1;
+  }
+  &.particular {
+    .custom-control-label {
+      &:after {
+        width: 1.1rem;
+        height: 1.1rem;
+        background-image: url(assets/img/particular_icon.svg);
+        background-size: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+
+  &.professionnal {
+    .custom-control-label {
+      &:after {
+        width: 1.15rem;
+        height: 1.15rem;
+        background-image: url(assets/img/professionnal_icon.svg);
+        background-size: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+<div class="tracker-container">
+    <div class="tracker-title">
+        <p>
+            suivez vos produits
+            <span>
+                Détectez l’emplacement de vos produits rapidement
+            </span>
+            <i class="bar-icon"></i>
+        </p>
+    </div>
+    <!--<ng-template #search>-->
+  <ng-template #tracking>
+        <form class="">
+            <div class="form-group row">
+                <div class="col-md-7 col-sm-6 col-12">
+                    <!--<input type="text" class="form-control" id="inputCommand" placeholder="Destination">-->
+                    <input id="senderGouvernorat"
+                           type="text"
+                           class="form-control custom-form-control"
+                           name="desCity"
+                           [ngbTypeahead]="search"
+                           [resultTemplate]="rt"
+                           [inputFormatter]="formatter"
+                           (change)="modval()"
+                           placeholder="Commune*"
+                           [(ngModel)]="model"
+
+                    />
+                    <ng-template #rt let-r="result" let-t="term">
+                        <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+                    </ng-template>
+                </div>
+                <div class="col-md-5 col-sm-6 col-12">
+                    <button type="submit" class="btn green-btn-lg mb-2" routerLink="/commande">Lancer</button>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+    <form class="" [formGroup]="searchForm" (ngSubmit)="onSubmit()" *ngIf="SelectedRadio == DefaultRadio; else tracking">
+        <div class="form-group row">
+            <div class="col-md-7 col-sm-6 col-12">
+                <input type="text" class="form-control" id="inputSearch"  formControlName="searchBox" placeholder="Recherche ...">
+            </div>
+            <div class="col-md-5 col-sm-6 col-12">
+                <button type="submit" class="btn green-btn-lg mb-2">Recherche</button>
+            </div>
+
+        </div>
+    </form>
+    <div class="radio-controls">
+        <ul class="list-inline">
+            <li class="list-inline-item" *ngFor="let method of ColiMethod">
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" type="radio"
+                           name="RadioColi"
+                           (change)="radioHandler($event)"
+                           [checked]="DefaultRadio"
+                           id="{{method.value}}-{{method.id}}" value="{{method.id}}">
+                    <label class="custom-control-label" for="{{method.value}}-{{method.id}}">
+                        {{method.name}}
+                    </label>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

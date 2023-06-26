@@ -1,0 +1,41 @@
+.help-page {
+  .help-header {
+    background-image: url("assets/img/support-bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: #fff;
+    padding: 50px 0;
+    h2 {
+      font-family: $bold-font;
+      font-size: 36px;
+      text-transform: uppercase;
+      margin-bottom: 0;
+      padding: 0 10px;
+      @include media-breakpoint-down(sm) {
+        font-size: 28px;
+      }
+    }
+    p {
+      font-family: $regular-font;
+      font-size: 18px;
+      margin: 0;
+      padding: 0 10px;
+      @include media-breakpoint-down(sm) {
+        font-size: 16px;
+      }
+    }
+  }
+  .contact-bloc {
+      @include media-breakpoint-down(sm) {
+        .contact-title {
+          font-size: 28px;
+        }
+        .contact-description {
+          font-size: 16px;
+        }
+    }
+
+  }
+}

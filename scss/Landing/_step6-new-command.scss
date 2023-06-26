@@ -1,0 +1,104 @@
+.final-step {
+  .code-block {
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    .img-container {
+      padding: 15px;
+      text-align: center;
+      img {
+        max-width: 70px;
+        width: 100%;
+        height: auto;
+      }
+    }
+    .text-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      p {
+        font-family: $bold-font;
+        font-size: 18px;
+        margin: 0;
+        span {
+          color: $green-1;
+          font-family: $bold-font;
+        }
+      }
+    }
+  }
+  .qr-code {
+    text-align: center;
+    .main-code {
+      qrcode {
+        img {
+          max-width: 250px;
+          width: 100%;
+          margin: 0 auto;
+        }
+      }
+    }
+    .text {
+      max-width: 375px;
+      margin: 20px auto;
+      font-family: $medium-font;
+    }
+  }
+  .button-controls {
+    text-align: right;
+    margin-top: 20px;
+    button {
+      margin-bottom: 10px;
+      &:last-child {
+        margin-left: 18px;
+        @media(max-width: 400px) {
+          margin-left: 0;
+        }
+      }
+    }
+    @media (max-width: 400px) {
+      button{
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+  .download-link {
+    .dropdown-container {
+      width: 200px;
+      margin: 0 auto;
+      .custom-dropdown-button {
+        width: 100%;
+      }
+      .dropdown-menu {
+        width: 100%;
+        border-radius: 0;
+        margin: 0;
+        padding: 0;
+        button {
+          display: block;
+          width: 100%;
+          background-color: #fff;
+          border: 0;
+          color: $black-1;
+          font-size: 16px;
+          font-family: $medium-font;
+          cursor: pointer;
+          text-align: left;
+          padding: 8px 10px;
+          border-bottom: 1px solid $border-color;
+          fa-icon {
+            padding-right: 6px;
+          }
+          &:hover, &:focus, &:active {
+            background-color: $green-1;
+            color: #fff;
+          }
+          &:last-child {
+            border-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}

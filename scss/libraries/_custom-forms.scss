@@ -1,0 +1,36 @@
+.form-text {
+  margin-bottom: 18px;
+  h3 {
+    font-family: $medium-font;
+    font-size: 18px;
+    color: $green-1;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  p {
+    font-size: 14px;
+    margin: 0;
+  }
+}
+.custom-form-control {
+  padding: 1.6rem 0.75rem;
+  border-radius: 0;
+  border-color: $gray-6;
+}
+.custom-select {
+  height: calc(3.25rem + 2px);
+  padding: 1rem 0.75rem;
+  border-radius: 0;
+  border-color: $gray-6;
+}
+.custom-select-sm {
+  height: calc(2.25rem + 2px);
+  padding: 6px;
+  border-radius: 0;
+  border-color: $gray-6;
+}
+.custom-form-control[type=number] {
+  border-radius: 0;
+  height: calc(3.25rem + 2px);
+  padding: 0.875rem 0.75rem;
+}

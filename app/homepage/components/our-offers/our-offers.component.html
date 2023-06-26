@@ -1,0 +1,32 @@
+<div class="our-offers">
+    <p class="top-title">
+        {{OffersContent.title}}
+    </p>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center offer-intro">
+                <h2 class="offer-title">{{OffersContent.title}}</h2>
+                <p class="offer-text">
+                    {{OffersContent.description}}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-6" *ngFor="let bloc of OffersContent.blocs">
+                <div class="offers-list text-center">
+                    <div  class="offer-item-link">
+                        <div class="icon-container">
+                            <img class="offer-img" [src]="bloc.icon_image">
+                        </div>
+                        <h4 class="offer-item-title">
+                            {{bloc.title}}
+                        </h4>
+                        <p class="offer-item-text">
+                            {{bloc.description}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

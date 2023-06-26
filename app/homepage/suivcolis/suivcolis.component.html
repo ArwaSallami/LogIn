@@ -1,0 +1,208 @@
+<div class="suivi-colis-page">
+  <div class="suivi-colis-header">
+    <h2>
+      Suivi votre Colis
+    </h2>
+    <p>
+      Accueil / Suivi Colis
+    </p>
+  </div>
+  <div class="container">
+    <app-suivi-exp></app-suivi-exp>
+
+<!--    <div class="tracker-container relative-position" >-->
+<!--      <div class="tracker-title">-->
+<!--        <p>-->
+<!--          suivez vos produits-->
+<!--          <span>-->
+<!--		        Détectez l’emplacement de vos produits rapidement-->
+<!--		    </span>-->
+<!--          <i class="bar-icon"></i>-->
+<!--        </p>-->
+<!--      </div>-->
+<!--      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">-->
+<!--        <div class="form-group row">-->
+<!--          <div class="col-md-7 col-sm-6 col-12">-->
+<!--            <input type="text" class="form-control" formControlName="searchBox" id="inputSearch" placeholder="Recherche ...">-->
+<!--          </div>-->
+<!--          <div class="col-md-5 col-sm-6 col-12">-->
+<!--            <button type="submit" class="btn green-btn-lg mb-2">Recherche</button>-->
+<!--          </div>-->
+
+<!--        </div>-->
+<!--      </form>-->
+<!--    </div>-->
+
+<!--    <div class="command-container">-->
+<!--      <div class="intro-box" *ngIf="!error && !info">-->
+
+<!--          <div class="rule-image">-->
+<!--            <img src="assets/img/livred-box.svg" alt="">-->
+<!--          </div>-->
+<!--          <div class="rule-text">-->
+<!--            <h4>Restez à jour et suivez votre colis</h4>-->
+<!--            <p>-->
+<!--              - Entrez le code public de votre expedition pour avoir affiche tout les informations-->
+<!--            </p>-->
+<!--            <p>-->
+<!--              - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dui nisl, pulvinar at condimentum id, euismod quis arcu.-->
+<!--            </p>-->
+<!--            <p>-->
+<!--              - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dui nisl, pulvinar at condimentum id, euismod quis arcu.-->
+<!--            </p>-->
+<!--            <p>-->
+<!--              - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dui nisl, pulvinar at condimentum id, euismod quis arcu.-->
+<!--            </p>-->
+<!--          </div>-->
+
+<!--      </div>-->
+<!--      <div class="error-box" *ngIf="error">-->
+<!--        <h4>-->
+<!--        Numero de colis est Invalide . Veuillez saisir un code valide .-->
+<!--        </h4>-->
+<!--      </div>-->
+<!--      <div class="info-box" *ngIf="info && !error">-->
+<!--        <h3>Suivir un coli : </h3>-->
+
+<!--        <table class="table custom-table additional-services">-->
+<!--          <tbody>-->
+<!--          <tr >-->
+<!--            <td scope="row" data-label="Services Complémentaires">-->
+<!--              <ul class="list-inline package-item">-->
+<!--                <li class="list-inline-item">-->
+<!--                  <span class="description">De : {{depAdress.firstName}} {{depAdress.lastName}}</span>-->
+<!--                  <p class="package-name">{{expedition.pickUpDate | date:'d'}}/{{expedition.pickUpDate | date:'M'}}/{{expedition.pickUpDate | date:'y'}} </p>-->
+<!--                </li>-->
+<!--                <li class="list-inline-item">-->
+<!--                  <span class="description">Ref : {{expedition.publicCode}}</span>-->
+<!--                  <p>{{expedition.packages.length}} Courrier</p>-->
+<!--                </li>-->
+<!--                <li class="list-inline-item">-->
+<!--                  <span class="description">Vers : {{desAdress.firstName}} {{desAdress.lastName}}</span>-->
+<!--                  <p>Date de recive</p>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--          </tbody>-->
+<!--        </table>-->
+<!--&lt;!&ndash;        *ngIf="expedition.deliveryMethod==='drop'"&ndash;&gt;-->
+<!--        <aw-wizard  [disableNavigationBar]="true" #wwizard>-->
+<!--          <aw-wizard-step stepId="0" stepTitle="start"><span>preparation de colis </span><div *ngIf="expedition.depPointRelai; then depPoint"></div>-->
+<!--            <div *ngIf="detaills.length>0;then detailTable"></div>-->
+<!--          </aw-wizard-step>-->
+<!--          <aw-wizard-step stepId="1" stepTitle="PointRelaiDepart" *ngIf="expedition.depPointRelai"><span> PointRelais Depart</span>-->
+<!--            <div *ngIf="detaills.length>0;then detailTable"></div>-->
+<!--          </aw-wizard-step>-->
+<!--          <aw-wizard-step stepId="2" stepTitle="Depot"><span> Depot</span>-->
+<!--            <div *ngIf="detaills.length>0;then detailTable"></div>-->
+<!--          </aw-wizard-step>-->
+<!--          <aw-wizard-step stepId="3" stepTitle="outForDelivery" ><span>out for delivery</span>-->
+<!--            <div *ngIf="detaills.length>0;then detailTable"></div>-->
+<!--          </aw-wizard-step>-->
+<!--          <aw-wizard-step stepId="4" stepTitle="PointRelaiDes" *ngIf="expedition.desPointRelai" ><span>Point Relais des </span><div *ngIf="expedition.desPointRelai; then desPoint"></div>-->
+<!--            <div *ngIf="detaills.length>0;then detailTable"></div>-->
+<!--          </aw-wizard-step>-->
+<!--          <aw-wizard-step stepId="5" stepTitle="finished" ><span>Expedition livree</span>-->
+<!--            <div *ngIf="detaills.length>0;then detailTable"></div>-->
+<!--          </aw-wizard-step>-->
+
+<!--        </aw-wizard>-->
+
+
+
+
+<!--      </div>-->
+<!--      <ng-template #detailTable>-->
+<!--        <h3>Détails</h3>-->
+<!--        <table>-->
+<!--          <thead>-->
+<!--          <tr>-->
+<!--          <th>date</th>-->
+<!--          <th>localisation</th>-->
+<!--          <th>description</th>-->
+<!--          </tr>-->
+<!--          </thead>-->
+<!--          <tbody>-->
+<!--          <ng-container *ngFor="let detail of detaills ">-->
+<!--          <tr>-->
+<!--            <td>{{detail.date | date:'d'}} / {{detail.date | date:'M'}} / {{detail.date | date:'y'}}</td>-->
+<!--            <td>{{detail.localisation}}</td>-->
+<!--            <td>{{detail.description}}</td>-->
+<!--          </tr>-->
+<!--          </ng-container>-->
+<!--          </tbody>-->
+<!--        </table>-->
+<!--      </ng-template>-->
+
+<!--      <ng-template #depPoint>-->
+<!--        <div class="form-row mb-2">-->
+<!--          <button class="btn green-btn-sm"-->
+<!--                  data-toggle="modal"-->
+<!--                  data-target="#dePointsModalDepart">-->
+<!--            Voir le point de relais-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </ng-template>-->
+<!--      <ng-template #desPoint>-->
+<!--        <div class="form-row mb-2">-->
+<!--          <button class="btn green-btn-sm"-->
+<!--                  data-toggle="modal"-->
+<!--                  data-target="#dePointsModalDepart">-->
+<!--            Voir le point de relais-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </ng-template>-->
+<!--    </div>-->
+
+
+  </div>
+</div>
+<!--&lt;!&ndash; modal de map point relais de depart&ndash;&gt;-->
+<!--<div class="modal fade" id="dePointsModalDepart" tabindex="-1" role="dialog" aria-labelledby="dePointsModalDepart" aria-hidden="true">-->
+<!--  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title" id="exampleModalLongTitle">Point de relai</h5>-->
+<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--          <span aria-hidden="true">&times;</span>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <div id="step-one">-->
+<!--          <app-suivi-map [pointRelai]="expedition.depPointRelai"></app-suivi-map>-->
+<!--        </div >-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <button type="button" class="btn black-btn-xs" data-dismiss="modal" >Fermer</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash;modal de map de point de relais de destination&ndash;&gt;-->
+
+<!--<div class="modal fade" id="dePointsModalArrive" tabindex="-1" role="dialog" aria-labelledby="dePointsModalArrive" aria-hidden="true">-->
+<!--  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title" id="exampleModalLongTitle1">Point de relais</h5>-->
+<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--          <span aria-hidden="true">&times;</span>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <div id="stepone-des">-->
+<!--          <app-suivi-map [pointRelai]="expedition.desPointRelai"></app-suivi-map>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <button type="button" class="btn black-btn-xs" data-dismiss="modal" >Fermer</button>-->
+<!--      </div>-->
+
+<!--    </div>-->
+<!--  </div></div>-->
+
+
+
+

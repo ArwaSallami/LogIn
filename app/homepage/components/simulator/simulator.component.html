@@ -1,0 +1,29 @@
+<div class="simulator-bloc">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="delivery-guy-img"></div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="simulation-command">
+                    <article>
+                        <h2 class="simulation-title">{{SimulatorContent.title}}</h2>
+                        <p class="simulation-description">
+                            {{SimulatorContent.description}}</p>
+                    </article>
+                    <ul class="list-unstyled advantage-list"
+                        *ngFor="let adavantage of SimulatorContent.advantages">
+                        <li>
+                            <p>{{adavantage.title}}</p>
+                        </li>
+                    </ul>
+                    <div class="button-controls">
+                    <button class="btn green-btn-lg" routerLink="/commande">lancer une commande</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

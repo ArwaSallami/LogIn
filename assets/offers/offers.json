@@ -1,0 +1,69 @@
+[
+  {
+    "offerId": 7,
+    "offerName": "Module e-commerce",
+    "description" : "Quel que soit votre profil, nous saurons vous accompagner avec une solution ...",
+    "iconUrl": "assets/img/payment-card.svg",
+    "text": "Quel que soit votre profil, nous saurons vous accompagner avec une solution adaptée Nous vous proposons des solutions d'intégration simples et rapides pour votre site marchand. <br/>Les modules de nos offres e-commerce sont faciles à intégrer. <br/>Pour un meilleur accompagnement, nos ingénieurs sont à votre disposition pour vous aider techniquement lors de leur mise en place.",
+    "imageUrl": "assets/img/offer-detail-image.png"
+  },
+  {
+    "offerId": 5,
+    "offerName": "Traçabilité",
+    "description" : "Vous n’avez plus besoin d'appeler le Service Clients. Notre suivi ...",
+    "iconUrl": "assets/img/globe.svg",
+    "text": "Vous n’avez plus besoin d'appeler le Service Clients. Notre suivi en ligne vous donne les détails de l’acheminement de votre envoi à chaque étape.<br/>Il vous permet de suivre le déplacement de nos véhicules en temps réel accompagné d’un système de notification et d’alerte.<br/>Que vous soyez au bureau ou en déplacement, ce service gratuit vous permet d’obtenir les informations dont vous aurez besoin pour tenir informés vos clients.",
+    "imageUrl": "assets/img/offer-detail-image.png"
+  },
+  {
+    "offerId": 1,
+    "offerName": "Service économique ",
+    "description" : "La coopérative de distribution est bien placé pour vous proposer les meilleurs prix ...",
+    "iconUrl": "assets/img/economy-service.svg",
+    "text": "Log’in  est bien placé pour vous proposer le meilleur rapport Qualité / Prix .\n Si vos envois peuvent voyager à vitesse normale, pourquoi les passer en express ?\nNous organisons la livraison économique de vos colis, avec des prix de transport les moins chers, mais toujours assez rapides pour vos expéditions ordinaires (enveloppe, colis…) C’est le service le moins coûteux.\nIl offre un délai de livraison compris entre 24h à 72h à partir du jour du ramassage . Il est destiné aux envois inférieurs à 30 kg.",
+    "imageUrl": "assets/img/offer-detail-image.png"
+  },
+  {
+    "offerId": 2,
+    "offerName": "Service rapide ",
+    "description" : "L’envoi rapide désigne un acheminement rapide de vos plis, colis, ...",
+    "iconUrl": "assets/img/fast-service.svg",
+    "text": "L’envoi rapide désigne un acheminement rapide de vos plis, colis, … en national.<br/>C’est un service offert aux clients dont la variable délais est relativement importante. Il offre un délai de livraison de 24h à partir du jour de la ramasse.<br/>Il est destiné aux envois inférieurs à 30 kg.",
+    "imageUrl": "assets/img/offer-detail-image.png"
+  },
+  {
+    "offerId": 3,
+    "offerName": "Service express ",
+    "description" : "C’est un service offert aux clients dont la livraison doit se faire le jour même ...",
+    "iconUrl": "assets/img/delivery-van.svg",
+    "text" : "C’est un service offert aux clients dont la livraison doit se faire le jour même, pourvu que la ramasse est faîte avant 10h du matin(Grand Tunis, Sousse, Sfax).<br/>Il est destiné aux envois inférieurs à 30 kg et aux plis. ",
+    "imageUrl": "assets/img/offer-detail-image.png"
+  },
+  {
+    "offerId": 4,
+    "offerName": "Service personnalisé ",
+    "description" : "C’est un service offert aux clients désireux de faire la livraison ...",
+    "iconUrl": "assets/img/livred-box.svg",
+    "text": "C’est un service offert aux clients désireux de faire la livraison à une heure fixe pour colis, enveloppes et autres objets pondéreux et /ou volumineux. Offre soumise à une consultation commerciale...",
+    "imageUrl": "assets/img/offer-detail-image.png"
+  },
+  {
+    "offerId": 6,
+    "offerName": "Commander des emballages ",
+    "description" : "Nous vous proposons de commander en ligne toute notre gamme d'emballages ...",
+    "iconUrl": "assets/img/secure-box.svg",
+    "text": "Nous vous proposons de commander en ligne toute notre gamme d'emballages riche et variée afin que vous puissiez expédier en toute sérénité vos envois",
+    "imageUrl": "assets/img/offer-detail-image.png",
+    "emballage": [
+      {
+        "emballageText": "<span>Emballage en carton : </span>vous pouvez choisir entre nos 5 modèles pour des poids variant entre 0.1g à 10kg.",
+        "emballageImage": ""
+      },
+      {
+        "emballageText": "<span>Enveloppe à bulles : </span>vous pouvez choisir entre nos 3 modèles selon la taille de votre produit",
+        "emballageImage": ""
+      }
+    ]
+  }
+
+]

@@ -1,0 +1,389 @@
+<div class="auth-title">
+  <p>
+    Inscrivez-vous
+    <i class="bar-icon"></i>
+  </p>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+        <div class="alert alert-danger"
+             *ngIf="form.errors">
+          Champs invalides
+        </div>
+        <div class="alert alert-danger"
+             *ngIf="errorMsg">
+          {{ errorMsg }}
+        </div>
+        <div class="controls contact-form">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group mt-4 text-center">
+                <div class="icon-radio-btn custom-control-inline particular"
+                     [ngClass]="selected ? 'is-checked' : '' ">
+                  <input type="radio"
+                         id="parRadio"
+                         value="particular"
+                         formControlName="accountType"
+                         class="custom-control-input" (change)="typeChange( $event)">
+                  <label class="custom-control-label"
+                         for="parRadio">Particulier</label>
+
+                </div>
+
+                <div class=" icon-radio-btn custom-control-inline professionnal"
+                     [ngClass]="!selected ? 'is-checked' : '' ">
+                  <input type="radio"
+                         id="proRadio"
+                         value="pro"
+                         formControlName="accountType"
+                         class="custom-control-input" (change)="typeChange( $event)">
+                  <label class="custom-control-label"
+                         for="proRadio">Entreprise</label>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- prénom -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="firstName">Prénom</label>
+                <input
+                        formControlName="firstName"
+                        id="firstName"
+                        type="text"
+                        class="form-control custom-form-control"
+                        placeholder="Prénom"
+                        [ngClass]="{'red-border': firstName.invalid && (firstName.dirty || firstName.touched)}"
+                >
+                <small class="form-text text-muted help-block with-errors"
+                     *ngIf=" firstName.invalid && (firstName.dirty || firstName.touched)">
+                    Entrez Votre prenom
+                </small>
+              </div>
+            </div>
+
+            <!-- nom -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="lastName">Nom</label>
+                <input
+                        formControlName="lastName"
+                        id="lastName"
+                        type="text"
+                        class="form-control custom-form-control"
+                        placeholder="Nom"
+                        [ngClass]="{'red-border': lastName.invalid && (lastName.dirty || lastName.touched)}"
+                >
+                <small class="form-text text-muted help-block with-errors"
+                     *ngIf=" lastName.invalid && (lastName.dirty || lastName.touched)">
+                  <span>
+                    Entrez Votre Nom
+                  </span>
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="!selected">
+          <div class="col-md-12" >
+
+            <div class="form-group">
+              <label for="companyName">Société: </label>
+              <input
+                formControlName="companyName"
+                id="companyName"
+                type="text"
+                class="form-control custom-form-control"
+                placeholder="Société"
+
+              >
+
+            </div>
+          </div>
+          </div>
+          <div class="row" *ngIf="!selected">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="registerCommerce">N° du registre de commerce </label>
+                <input
+                  formControlName="registerCommerce"
+                  id="registerCommerce"
+                  type="text"
+                  class="form-control custom-form-control"
+                  placeholder="N° du registre de commerce"
+
+                >
+              </div>
+            </div>
+
+            <!-- nom -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="lastName">Matricule Fiscal :</label>
+                <input
+                  formControlName="matFiscal"
+                  id="matFiscal"
+                  type="text"
+                  class="form-control custom-form-control"
+                  placeholder="Matricule Fiscal"
+
+                >
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <!-- @ mail -->
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="form_email">Adresse e-mail</label>
+                <input
+                        formControlName="email"
+                        id="form_email"
+                        type="email"
+                        class="form-control custom-form-control"
+                        placeholder="Adresse e-mail *"
+                        [ngClass]="{'red-border': email.invalid && (email.dirty || email.touched)}"
+                >
+                <small class="form-text text-muted help-block with-errors"
+                     *ngIf=" email.invalid && (email.dirty || email.touched)">
+                  <span>
+                    Entrez une adresse e-mail valide
+                  </span>
+                </small>
+              </div>
+            </div>
+            <div class="col-md-12" *ngIf="!selected">
+
+              <div class="form-group">
+                <label for="phoneNumber">Site web / Page Facebook</label>
+                <input
+                  formControlName="link"
+                  id="link"
+                  type="text"
+                  class="form-control custom-form-control"
+                  placeholder="Site web / Page Facebook"
+
+                >
+
+              </div>
+            </div>
+
+            <!-- numéro tel -->
+            <div class="col-md-12">
+
+              <div class="form-group">
+                <label for="phoneNumber">N° Téléphone</label>
+                <input
+                        formControlName="phoneNumber"
+                        id="phoneNumber"
+                        type="text"
+                        class="form-control custom-form-control"
+                        placeholder="N° Téléphone"
+                        [ngClass]="{'red-border': phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)}"
+                >
+                <small class="form-text text-muted help-block with-errors"
+                       *ngIf=" phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)">
+                  <span>
+                    Entrez Votre numero de telephone
+                  </span>
+                </small>
+              </div>
+            </div>
+            <div class="col-md-12" *ngIf="!selected">
+
+              <div class="form-group">
+                <label for="secondPhoneNumber">N° Téléphone 2</label>
+                <input
+
+                  id="secondPhoneNumber"
+                  type="text"
+                  class="form-control custom-form-control"
+                  placeholder="N° Téléphone 2"
+                  formControlName="secondPhoneNumber"
+
+                >
+
+              </div>
+            </div>
+            <div class="col-md-12" *ngIf="!selected">
+
+              <div class="form-group">
+                <label for="fax">N° Fax</label>
+                <input
+                  formControlName="fax"
+                  id="Fax"
+                  type="text"
+                  class="form-control custom-form-control"
+                  placeholder="N° Fax"
+
+                >
+
+              </div>
+            </div>
+
+            <!-- adresse -->
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="address" *ngIf="selected">Adresse</label>
+                <label for="address" *ngIf="!selected">Adresse de siège</label>
+                <input
+                        formControlName="address"
+                        id="address"
+                        type="text"
+                        class="form-control custom-form-control"
+                        placeholder="Adresse"
+                        [ngClass]="{'red-border': address.invalid && (address.dirty || address.touched)}"
+                >
+                <small class="form-text text-muted help-block with-errors"
+                       *ngIf=" address.invalid && (address.dirty || address.touched)">
+                  <span>
+                    Entrez Votre adresse
+                  </span>
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- ville -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="city">Ville</label>
+                <input
+                        formControlName="city"
+                        id="city"
+                        type="text"
+                        class="form-control custom-form-control"
+                        placeholder="Ville"
+                        [ngClass]="{'red-border': city.invalid && (city.dirty || city.touched)}"
+                >
+                <small class="form-text text-muted help-block with-errors"
+                       *ngIf=" city.invalid && (city.dirty || city.touched)">
+                  <span>
+                    Entrez Votre ville
+                  </span>
+                </small>
+
+              </div>
+            </div>
+
+            <!-- code postal -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="zipCode">Code postale</label>
+                <input
+                        formControlName="zipCode"
+                        id="zipCode"
+                        type="text"
+                        class="form-control custom-form-control"
+                        placeholder="code postale"
+                        [ngClass]="{'red-border': zipCode.invalid && (zipCode.dirty || zipCode.touched)}"
+                >
+                <small class="form-text text-muted help-block with-errors"
+                       *ngIf=" zipCode.invalid && (zipCode.dirty || zipCode.touched)">
+                  Entrez Votre code postale
+                </small>
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- mot de passe -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input
+                        formControlName="plainPassword"
+                        id="password"
+                        type="password"
+                        placeholder="Mot de passe"
+                        class="form-control custom-form-control"
+
+                        [ngClass]="{'red-border': plainPassword.invalid && (plainPassword.dirty || plainPassword.touched)}"
+                >
+                <small class="form-text text-muted help-block with-errors"
+                       *ngIf=" plainPassword.invalid && (plainPassword.dirty || plainPassword.touched)">
+                  <span>
+                    Entrez une mot de passe
+                  </span>
+                </small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="confirm_password">Confirmer mot de passe</label>
+                <input
+                        formControlName="confirmPassword"
+                        id="confirm_password"
+                        type="password"
+                        placeholder="Confirmer mot de passe"
+                        class="form-control custom-form-control"
+
+                        [ngClass]="{'red-border': confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)}"
+                >
+                <small class="form-text text-muted help-block with-errors"
+                       *ngIf=" confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+                  <span>
+                    {{confirmError()}}
+                  </span>
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox"
+                   class="custom-control-input"
+                   formControlName="CGU"
+                   id="cgu"
+                   [ngClass]="{'red-border': cgu.invalid && (cgu.dirty || cgu.touched)}">
+            <label class="custom-control-label" for="cgu">
+              J'accepte
+            </label>
+            <span data-toggle="modal" data-target=".bd-example-modal-lg">les conditions générales</span>
+          </div>
+          <small class="form-text text-muted help-block with-errors"
+                 *ngIf=" cgu.invalid && (cgu.dirty || cgu.touched)">
+                  <span>
+                    Veuillez accepter les conditions générales
+                  </span>
+          </small>
+          <div class="button-controls">
+            <button [disabled]="!form.valid || isSubmitting || !cguSubmitted" type="submit" class="btn green-btn">
+              <span>
+                  <fa-icon class="display-none" [ngClass]="{
+                        'rotating': isSubmitting
+                        }" [icon]="['fas', 'spinner']"></fa-icon>
+                </span>
+              Inscription
+            </button>
+          </div>
+        </div>
+      </form>
+      <a routerLink="/login" class="login-link"><span>Déja inscrit ?</span> Connectez-vous</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Conditions générales de la coopérative de distribution</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Conditions goes here</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="green-btn" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
